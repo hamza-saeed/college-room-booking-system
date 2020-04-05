@@ -13,15 +13,15 @@ import java.util.Observer;
  */
 public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observer {
 
-        private SharedBookings sharedBookings;
+        private SharedData sharedData;
 
     /**
      * Creates new form RoomBookerGUI
      */
-    public RoomBookerGUI(SharedBookings initialBookings) {
+    public RoomBookerGUI(SharedData initialBookings) {
         super();
-        sharedBookings = initialBookings;
-        sharedBookings.addObserver(this);
+        sharedData = initialBookings;
+        sharedData.addObserver(this);
         initComponents();
         updateSharedBookings();
     }

@@ -13,7 +13,7 @@ public class RoomBooking {
     
     public static void main(String args[])    
     {
-         SharedBookings bookings = new SharedBookings();
+         SharedData bookings = new SharedData();
                   
          RoomManagerGUI roomMan1 = new RoomManagerGUI(bookings);
          RoomBookerGUI roomBook1 = new RoomBookerGUI(bookings);

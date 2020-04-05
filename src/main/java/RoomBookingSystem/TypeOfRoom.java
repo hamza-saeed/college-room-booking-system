@@ -10,5 +10,5 @@ package RoomBookingSystem;
  * @author Hamza
  */
     public enum TypeOfRoom {
-    COMPUTER_LAB,TUTORIAL_ROOM,LECTURE_THEATRE
+    COMPUTER_LAB,TUTORIAL_ROOM,LECTURE_THEATRE;
 }

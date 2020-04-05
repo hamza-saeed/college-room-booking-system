@@ -9,21 +9,28 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+
 /**
  *
  * @author Hamza
  */
 public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Observer {
 
-    private SharedBookings sharedBookings;
+    private SharedData sharedData;
     
     /**
      * Creates new form RoomManagerGUI
      */
-    public RoomManagerGUI(SharedBookings initialBookings) {
+    public RoomManagerGUI(SharedData initialBookings) {
         super();
-        sharedBookings = initialBookings;
-        sharedBookings.addObserver(this);
+        sharedData = initialBookings;
+        sharedData.addObserver(this);
         initComponents();
         updateSharedBookings();
     }
@@ -55,11 +62,13 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         spinUnavailableUntil = new javax.swing.JSpinner();
+        SimpleDateFormat spinTermBeginningModel = new SimpleDateFormat("dd/MM/yyyy");
         spinTermBeginning = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        SimpleDateFormat spinTermEndingModel = new SimpleDateFormat("dd/MM/yyyy");
         spinTermEnding = new javax.swing.JSpinner();
-        jButton2 = new javax.swing.JButton();
+        btnAddTermDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 400));
@@ -157,6 +166,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         spinUnavailableUntil.setBounds(440, 200, 170, 30);
 
         spinTermBeginning.setModel(new javax.swing.SpinnerDateModel());
+        spinTermBeginning.setEditor(new javax.swing.JSpinner.DateEditor(spinTermBeginning,spinTermBeginningModel.toPattern()));
         getContentPane().add(spinTermBeginning);
         spinTermBeginning.setBounds(100, 340, 150, 30);
 
@@ -169,12 +179,18 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         jLabel9.setBounds(10, 410, 70, 14);
 
         spinTermEnding.setModel(new javax.swing.SpinnerDateModel());
+        spinTermEnding.setEditor(new javax.swing.JSpinner.DateEditor(spinTermEnding,spinTermEndingModel.toPattern()));
         getContentPane().add(spinTermEnding);
         spinTermEnding.setBounds(100, 400, 150, 30);
 
-        jButton2.setText("btnAddTermDate");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(10, 450, 240, 23);
+        btnAddTermDate.setText("Add Term Dates");
+        btnAddTermDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTermDateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAddTermDate);
+        btnAddTermDate.setBounds(10, 450, 240, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,9 +201,39 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
 
     private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
         
-        OneRoom newRoom = new OneRoom(txtName.getText(),TypeOfRoom.COMPUTER_LAB,Integer.parseInt(spinRoomSpaces.getValue().toString()));
-        sharedBookings.addRoom(newRoom);
+        int spaces = Integer.parseInt(spinRoomSpaces.getValue().toString());
+        if (spaces > 0)
+        {
+            int selectedIndex = comboRoomType.getSelectedIndex();
+            TypeOfRoom roomType = (selectedIndex == 0) ? TypeOfRoom.COMPUTER_LAB : (selectedIndex == 1) ? TypeOfRoom.TUTORIAL_ROOM : (selectedIndex == 2) ? TypeOfRoom.LECTURE_THEATRE : null;
+            OneRoom newRoom = new OneRoom(txtName.getText(),roomType,spaces);
+            sharedData.addRoom(newRoom);
+            JOptionPane.showMessageDialog(null, "Room Added!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Room Not Added! Number of Spaces must be 1 or more!");
+        }
     }//GEN-LAST:event_btnAddRoomActionPerformed
+
+    private void btnAddTermDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTermDateActionPerformed
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String textTermBeginning = ((JSpinner.DefaultEditor)spinTermBeginning.getEditor()).getTextField().getText();
+        String textTermEnding = ((JSpinner.DefaultEditor)spinTermEnding.getEditor()).getTextField().getText();
+
+        LocalDate termBeginningDate = LocalDate.parse(textTermBeginning,formatter);
+        LocalDate termEndingDate = LocalDate.parse(textTermEnding,formatter);
+        if (termEndingDate.isAfter(termBeginningDate))
+        {
+            OneTerm newTerm = new OneTerm(termBeginningDate,termEndingDate);
+            sharedData.addTerm(newTerm);
+            JOptionPane.showMessageDialog(null, "Term Added!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Term Not Added. Ending Date Must Be After Beginning!");
+        }
+    }//GEN-LAST:event_btnAddTermDateActionPerformed
 
     
         @Override
@@ -234,7 +280,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     
     public void addRoomsToComboBox()
     {
-        ArrayList<OneRoom> rooms = sharedBookings.getTheRooms();
+        ArrayList<OneRoom> rooms = sharedData.getTheRooms();
         String[] arr = new String[rooms.size()];
         for (int i = 0; i < arr.length;i++)
         {
@@ -245,11 +291,11 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRoom;
+    private javax.swing.JButton btnAddTermDate;
     private javax.swing.JButton btnAddUnavailability;
     private javax.swing.JButton btnSeeBookings;
     private javax.swing.JComboBox<String> comboRoom;
     private javax.swing.JComboBox<String> comboRoomType;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

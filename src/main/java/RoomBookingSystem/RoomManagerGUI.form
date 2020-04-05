@@ -256,6 +256,10 @@
           <SpinnerModel initial="now" stepSize="5" type="date"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SimpleDateFormat spinTermBeginningModel = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="spinTermBeginning.setEditor(new javax.swing.JSpinner.DateEditor(spinTermBeginning,spinTermBeginningModel.toPattern()));"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="100" y="340" width="150" height="30"/>
@@ -288,16 +292,23 @@
           <SpinnerModel initial="now" stepSize="5" type="date"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="SimpleDateFormat spinTermEndingModel = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="spinTermEnding.setEditor(new javax.swing.JSpinner.DateEditor(spinTermEnding,spinTermEndingModel.toPattern()));"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="100" y="400" width="150" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnAddTermDate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="btnAddTermDate"/>
+        <Property name="text" type="java.lang.String" value="Add Term Dates"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddTermDateActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="10" y="450" width="240" height="-1"/>
