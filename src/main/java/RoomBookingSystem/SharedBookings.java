@@ -5,6 +5,7 @@
  */
 package RoomBookingSystem;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -12,26 +13,23 @@ import java.util.Observable;
  * @author Hamza
  */
 public class SharedBookings extends Observable {
-   
-    private String theStr;
+       
+    private ArrayList<OneRoom> listOfRooms = new ArrayList<OneRoom>();
     
     public SharedBookings()
     {
         super();
+    }   
+   
+    public ArrayList<OneRoom> getTheRooms()
+    {
+        return listOfRooms;
     }
     
-    public String getTheBookings() 
+    public void addRoom(OneRoom newRoom)
     {
-        return theStr;
-    }
-    
-    public void setTheBookings(String theStr)
-    {
-        this.theStr = theStr;
+        listOfRooms.add(newRoom);
         setChanged();
         notifyObservers();
     }
-   
-    
-    
 }

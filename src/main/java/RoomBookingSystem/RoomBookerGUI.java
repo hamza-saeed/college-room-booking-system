@@ -59,13 +59,13 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
 
         tableAvailability.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Time", "Spaces", "Type", "Notes"
+                "Name", "Time", "Spaces", "Type"
             }
         ));
         jScrollPane1.setViewportView(tableAvailability);
@@ -173,7 +173,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookSelectedRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookSelectedRoomActionPerformed
-        sharedBookings.setTheBookings(txtName.getText());
+        //tbi
     }//GEN-LAST:event_btnBookSelectedRoomActionPerformed
     
         @Override
@@ -188,9 +188,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
     
     public void updateSharedBookings()
     {
-        txtName.setText(sharedBookings.getTheBookings());
-        //get 
-        //sharedBookings.getTheBookings();
+        //tbi
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 
 
-mainClassName = 'RoomBookingSystem.Main'
+mainClassName = 'RoomBookingSystem.RoomBooking'
 
 repositories {
     jcenter()

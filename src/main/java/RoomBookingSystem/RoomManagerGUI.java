@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package RoomBookingSystem;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 /**
  *
  * @author Hamza
@@ -69,6 +72,11 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         jLabel1.setBounds(389, 11, 274, 44);
 
         btnAddRoom.setText("Add Room");
+        btnAddRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRoomActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAddRoom);
         btnAddRoom.setBounds(40, 240, 220, 23);
 
@@ -172,8 +180,14 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeeBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeBookingsActionPerformed
-        sharedBookings.setTheBookings(txtName.getText());
+        //tbi
     }//GEN-LAST:event_btnSeeBookingsActionPerformed
+
+    private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
+        
+        OneRoom newRoom = new OneRoom(txtName.getText(),TypeOfRoom.COMPUTER_LAB,Integer.parseInt(spinRoomSpaces.getValue().toString()));
+        sharedBookings.addRoom(newRoom);
+    }//GEN-LAST:event_btnAddRoomActionPerformed
 
     
         @Override
@@ -215,9 +229,18 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     
     public void updateSharedBookings()
     {
-        txtName.setText(sharedBookings.getTheBookings());
-        //get 
-        //sharedBookings.getTheBookings();
+        addRoomsToComboBox();
+    }
+    
+    public void addRoomsToComboBox()
+    {
+        ArrayList<OneRoom> rooms = sharedBookings.getTheRooms();
+        String[] arr = new String[rooms.size()];
+        for (int i = 0; i < arr.length;i++)
+        {
+            arr[i] = rooms.get(i).getRoomName();
+        }
+        comboRoom.setModel(new DefaultComboBoxModel<String>(arr));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
