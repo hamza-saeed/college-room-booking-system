@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -51,7 +52,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableAvailability = new javax.swing.JTable();
+        tableBookings = new javax.swing.JTable();
         comboRoom = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -109,18 +110,15 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         getContentPane().add(jLabel2);
         jLabel2.setBounds(44, 128, 70, 14);
 
-        tableAvailability.setModel(new javax.swing.table.DefaultTableModel(
+        tableBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Name", "Time", "Spaces", "Type", "Notes"
+                "Room Name", "Date", "Time", "Booker Name", "Email", "Phone", "Notes"
             }
         ));
-        jScrollPane1.setViewportView(tableAvailability);
+        jScrollPane1.setViewportView(tableBookings);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(709, 106, 320, 120);
@@ -276,6 +274,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     public void updateSharedBookings()
     {
         addRoomsToComboBox();
+        addBookingsToTable();
     }
     
     public void addRoomsToComboBox()
@@ -287,6 +286,17 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
             arr[i] = rooms.get(i).getRoomName();
         }
         comboRoom.setModel(new DefaultComboBoxModel<String>(arr));
+    }
+    
+    public void addBookingsToTable()
+    {
+        ArrayList<OneBooking> bookings = sharedData.getTheBookings();
+        DefaultTableModel model = (DefaultTableModel) tableBookings.getModel();
+        model.setRowCount(0);
+        for (OneBooking booking : bookings)
+        {
+            model.addRow(new Object[]{booking.getRoomName(),booking.getBookingDate().toString(),booking.getBookingTime().toString(),booking.getBookerName(),booking.getBookerEmail(),booking.getBookerPhone(),booking.getBookingNotes()});
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,7 +321,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     private javax.swing.JSpinner spinTermEnding;
     private javax.swing.JSpinner spinUnavailableFrom;
     private javax.swing.JSpinner spinUnavailableUntil;
-    private javax.swing.JTable tableAvailability;
+    private javax.swing.JTable tableBookings;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 

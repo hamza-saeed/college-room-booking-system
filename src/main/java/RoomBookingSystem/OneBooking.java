@@ -5,6 +5,8 @@
  */
 package RoomBookingSystem;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Hamza
@@ -12,24 +14,28 @@ package RoomBookingSystem;
 
 public class OneBooking {
     
-    OneRoom Room;
+    String RoomName;
     String BookerName;
     String BookerEmail;
     String BookerPhone;
     String BookingNotes;
+    LocalDate BookingDate;
+    TimeOfDay BookingTime;
     
-    public OneBooking(OneRoom room, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes)
+    public OneBooking(String roomName, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes,LocalDate bookingDate, TimeOfDay bookingTime)
     {
-        Room = room;
+        RoomName = roomName;
         BookerName = bookerName;
         BookerEmail = bookerEmail;
         BookerPhone = bookerPhone;
         BookingNotes = bookingNotes;
+        BookingDate = bookingDate;
+        BookingTime = bookingTime;
     }
     
-    public OneRoom getRoom()
+    public String getRoomName()
     {
-        return Room;
+        return RoomName;
     }
     
     public String getBookerName()
@@ -51,4 +57,15 @@ public class OneBooking {
     {
         return BookingNotes;
     }
+    
+    public LocalDate getBookingDate()
+    {
+        return BookingDate;
+    }
+    
+    public TimeOfDay getBookingTime()
+    {
+        return BookingTime;
+    }
+    
 }

@@ -40,7 +40,7 @@ public class SharedData extends Observable {
         return listOfBookings;
     }
     
-    public void addRoom(OneBooking newBooking)
+    public void addBooking(OneBooking newBooking)
     {
         listOfBookings.add(newBooking);
         setChanged();

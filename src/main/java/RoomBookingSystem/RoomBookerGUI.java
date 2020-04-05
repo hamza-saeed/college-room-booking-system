@@ -4,16 +4,25 @@
  * and open the template in the editor.
  */
 package RoomBookingSystem;
+
+import java.time.LocalDate;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.JSpinner;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Hamza
  */
-public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observer {
+public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Observer {
 
-        private SharedData sharedData;
+    private SharedData sharedData;
 
     /**
      * Creates new form RoomBookerGUI
@@ -38,6 +47,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAvailability = new javax.swing.JTable();
+        SimpleDateFormat spinDateModel = new SimpleDateFormat("dd/MM/yyyy");
         spinDateFilter = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,24 +69,27 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
 
         tableAvailability.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Name", "Time", "Spaces", "Type"
+                "Name", "Date", "Time", "Spaces", "Type"
             }
         ));
         jScrollPane1.setViewportView(tableAvailability);
 
         spinDateFilter.setModel(new javax.swing.SpinnerDateModel());
+        spinDateFilter.setEditor(new javax.swing.JSpinner.DateEditor(spinDateFilter,spinDateModel.toPattern()));
 
         jLabel2.setText("Availability");
 
         jLabel3.setText("Filter by Date");
 
         btnFilter.setText("Filter");
+        btnFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Name:");
 
@@ -173,10 +186,87 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookSelectedRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookSelectedRoomActionPerformed
-        //tbi
+        //validation
+        int row = tableAvailability.getSelectedRow();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (row != -1) {
+            String roomName = tableAvailability.getModel().getValueAt(row, 0).toString();
+            String time = tableAvailability.getModel().getValueAt(row, 2).toString();
+            LocalDate bookingDate = LocalDate.parse(tableAvailability.getModel().getValueAt(row, 1).toString(),formatter);
+            TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
+            String bookerName = txtName.getText();
+            String bookerEmail = txtEmail.getText();
+            String bookerPhone = txtPhone.getText();
+            String bookingNotes = txtNotes.getText();
+            OneBooking newBooking = new OneBooking(roomName, bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
+            sharedData.addBooking(newBooking);
+            JOptionPane.showMessageDialog(null, "Booking Added!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Booking Not Added! A Booking Time Must Be Selected!");
+        }
     }//GEN-LAST:event_btnBookSelectedRoomActionPerformed
-    
-        @Override
+
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String textDateFilter = ((JSpinner.DefaultEditor) spinDateFilter.getEditor()).getTextField().getText();
+        LocalDate dateFilter = LocalDate.parse(textDateFilter, formatter);
+        DefaultTableModel model = (DefaultTableModel) tableAvailability.getModel();
+        ArrayList<AvailableRoom> availableRooms = getAvailableBookingsOnDay(dateFilter);
+        model.setRowCount(0);
+        for (AvailableRoom availRoom : availableRooms)
+        {  
+            model.addRow(new Object[]{availRoom.RoomName,textDateFilter,availRoom.DayTime,"30","sdffd"});
+        }
+    }//GEN-LAST:event_btnFilterActionPerformed
+
+    private ArrayList<AvailableRoom> getAvailableBookingsOnDay(LocalDate date) {
+        ArrayList<OneBooking> bookings = sharedData.getTheBookings();
+        ArrayList<OneRoom> rooms = sharedData.getTheRooms();
+        ArrayList<AvailableRoom> availableRooms = new ArrayList<AvailableRoom>();
+        ArrayList<TimeOfDay> times = new ArrayList<TimeOfDay>();
+        if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            
+            times.add(TimeOfDay.MORNING);
+            times.add(TimeOfDay.AFTERNOON);
+            times.add(TimeOfDay.EVENING);
+            
+        } else {
+            boolean dateWithinTerm = isDateWithinTerm(date);
+
+            if (dateWithinTerm) {
+                //open evenings only on weekdays
+                times.add(TimeOfDay.EVENING);
+            } else {
+                times.add(TimeOfDay.MORNING);
+                times.add(TimeOfDay.AFTERNOON);
+                times.add(TimeOfDay.EVENING);
+            }
+        }
+        
+        for (OneRoom room : rooms)
+        {
+            for (TimeOfDay time : times)
+            {
+                AvailableRoom availRoom = new AvailableRoom(time,room.getRoomName());
+                availableRooms.add(availRoom);
+            }
+        }        
+        return availableRooms;
+    }
+
+    public boolean isDateWithinTerm(LocalDate date) {
+        ArrayList<OneTerm> terms = sharedData.getTheTerms();
+        boolean dateWithinTerm = false;
+
+        for (OneTerm term : terms) {
+            if (date.isAfter(term.TermBeginning) && date.isBefore(term.TermEnding)) {
+                dateWithinTerm = true;
+            }
+        }
+        return dateWithinTerm;
+    }
+
+    @Override
     public void run() {
         this.setVisible(true);
     }
@@ -185,9 +275,8 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
     public void update(Observable o, Object arg) {
         updateSharedBookings();
     }
-    
-    public void updateSharedBookings()
-    {
+
+    public void updateSharedBookings() {
         //tbi
     }
 
@@ -210,5 +299,24 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable,Observ
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 
+}
+
+class AvailableRoom {
+
+    TimeOfDay DayTime;
+    String RoomName;
+
+    public AvailableRoom(TimeOfDay dayTime, String roomName) {
+        DayTime = dayTime;
+        RoomName = roomName;
+    }
+
+    public TimeOfDay getDayTime() {
+        return DayTime;
+    }
+
+    public String getRoomName() {
+        return RoomName;
+    }
 
 }
