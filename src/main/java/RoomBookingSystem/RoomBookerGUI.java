@@ -32,7 +32,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         sharedData = initialBookings;
         sharedData.addObserver(this);
         initComponents();
-        updateSharedBookings();
+        updateSharedData();
     }
 
     /**
@@ -49,9 +49,8 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         tableAvailability = new javax.swing.JTable();
         SimpleDateFormat spinDateModel = new SimpleDateFormat("dd/MM/yyyy");
         spinDateFilter = new javax.swing.JSpinner();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnFilter = new javax.swing.JButton();
+        btnFindRooms = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -80,14 +79,12 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         spinDateFilter.setModel(new javax.swing.SpinnerDateModel());
         spinDateFilter.setEditor(new javax.swing.JSpinner.DateEditor(spinDateFilter,spinDateModel.toPattern()));
 
-        jLabel2.setText("Availability");
+        jLabel3.setText("Room Booking Date");
 
-        jLabel3.setText("Filter by Date");
-
-        btnFilter.setText("Filter");
-        btnFilter.addActionListener(new java.awt.event.ActionListener() {
+        btnFindRooms.setText("Find Rooms");
+        btnFindRooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFilterActionPerformed(evt);
+                btnFindRoomsActionPerformed(evt);
             }
         });
 
@@ -137,15 +134,12 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(148, 148, 148)
                         .addComponent(jLabel3)
-                        .addGap(30, 30, 30)
-                        .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnFilter))
+                        .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnFindRooms))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(341, 341, 341)
                         .addComponent(btnBookSelectedRoom)))
@@ -156,15 +150,13 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(15, 15, 15)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(btnFilter))
+                    .addComponent(btnFindRooms))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -192,32 +184,51 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         if (row != -1) {
             String roomName = tableAvailability.getModel().getValueAt(row, 0).toString();
             String time = tableAvailability.getModel().getValueAt(row, 2).toString();
-            LocalDate bookingDate = LocalDate.parse(tableAvailability.getModel().getValueAt(row, 1).toString(),formatter);
+            LocalDate bookingDate = LocalDate.parse(tableAvailability.getModel().getValueAt(row, 1).toString(), formatter);
             TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
             String bookerName = txtName.getText();
             String bookerEmail = txtEmail.getText();
             String bookerPhone = txtPhone.getText();
             String bookingNotes = txtNotes.getText();
-            OneBooking newBooking = new OneBooking(roomName, bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
-            sharedData.addBooking(newBooking);
-            JOptionPane.showMessageDialog(null, "Booking Added!");
+            if (!doesBookingExist(roomName, bookingDate, bookingTime)) {
+                OneBooking newBooking = new OneBooking(roomName, bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
+                sharedData.addBooking(newBooking);
+                JOptionPane.showMessageDialog(null, "Booking Added!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Booking Not Added! Someone already booked this!");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Booking Not Added! A Booking Time Must Be Selected!");
         }
     }//GEN-LAST:event_btnBookSelectedRoomActionPerformed
 
-    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+    public boolean doesBookingExist(String roomName, LocalDate bookingDate, TimeOfDay bookingTime) {
+        ArrayList<OneBooking> bookings = sharedData.getTheBookings();
+        for (OneBooking booking : bookings) {
+            if (booking.RoomName.equals(roomName) && booking.BookingDate.isEqual(bookingDate) && (booking.BookingTime.equals(bookingTime))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    private void btnFindRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRoomsActionPerformed
+        findRoomAvailability();
+    }//GEN-LAST:event_btnFindRoomsActionPerformed
+
+    private void findRoomAvailability() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String textDateFilter = ((JSpinner.DefaultEditor) spinDateFilter.getEditor()).getTextField().getText();
         LocalDate dateFilter = LocalDate.parse(textDateFilter, formatter);
         DefaultTableModel model = (DefaultTableModel) tableAvailability.getModel();
         ArrayList<AvailableRoom> availableRooms = getAvailableBookingsOnDay(dateFilter);
         model.setRowCount(0);
-        for (AvailableRoom availRoom : availableRooms)
-        {  
-            model.addRow(new Object[]{availRoom.RoomName,textDateFilter,availRoom.DayTime,"30","sdffd"});
+        for (AvailableRoom availRoom : availableRooms) {
+            model.addRow(new Object[]{availRoom.RoomName, textDateFilter, availRoom.DayTime, "30", "sdffd"});
         }
-    }//GEN-LAST:event_btnFilterActionPerformed
+    }
 
     private ArrayList<AvailableRoom> getAvailableBookingsOnDay(LocalDate date) {
         ArrayList<OneBooking> bookings = sharedData.getTheBookings();
@@ -225,11 +236,11 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         ArrayList<AvailableRoom> availableRooms = new ArrayList<AvailableRoom>();
         ArrayList<TimeOfDay> times = new ArrayList<TimeOfDay>();
         if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            
+
             times.add(TimeOfDay.MORNING);
             times.add(TimeOfDay.AFTERNOON);
             times.add(TimeOfDay.EVENING);
-            
+
         } else {
             boolean dateWithinTerm = isDateWithinTerm(date);
 
@@ -242,15 +253,15 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
                 times.add(TimeOfDay.EVENING);
             }
         }
-        
-        for (OneRoom room : rooms)
-        {
-            for (TimeOfDay time : times)
-            {
-                AvailableRoom availRoom = new AvailableRoom(time,room.getRoomName());
-                availableRooms.add(availRoom);
+
+        for (OneRoom room : rooms) {
+            for (TimeOfDay time : times) {
+                if (!doesBookingExist(room.getRoomName(), date, time)) {
+                    AvailableRoom availRoom = new AvailableRoom(time, room.getRoomName());
+                    availableRooms.add(availRoom);
+                }
             }
-        }        
+        }
         return availableRooms;
     }
 
@@ -273,18 +284,17 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
 
     @Override
     public void update(Observable o, Object arg) {
-        updateSharedBookings();
+        updateSharedData();
     }
 
-    public void updateSharedBookings() {
-        //tbi
+    public void updateSharedData() {
+        findRoomAvailability();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBookSelectedRoom;
-    private javax.swing.JButton btnFilter;
+    private javax.swing.JButton btnFindRooms;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

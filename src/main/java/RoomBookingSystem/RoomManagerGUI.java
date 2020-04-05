@@ -33,7 +33,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         sharedData = initialBookings;
         sharedData.addObserver(this);
         initComponents();
-        updateSharedBookings();
+        updateSharedData();
     }
 
     /**
@@ -47,7 +47,6 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
 
         jLabel1 = new javax.swing.JLabel();
         btnAddRoom = new javax.swing.JButton();
-        btnSeeBookings = new javax.swing.JButton();
         btnAddUnavailability = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -70,6 +69,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         SimpleDateFormat spinTermEndingModel = new SimpleDateFormat("dd/MM/yyyy");
         spinTermEnding = new javax.swing.JSpinner();
         btnAddTermDate = new javax.swing.JButton();
+        btnDeleteRoom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 400));
@@ -90,19 +90,10 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         getContentPane().add(btnAddRoom);
         btnAddRoom.setBounds(40, 240, 220, 23);
 
-        btnSeeBookings.setText("See Bookings");
-        btnSeeBookings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeeBookingsActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSeeBookings);
-        btnSeeBookings.setBounds(710, 240, 320, 23);
-
         btnAddUnavailability.setText("Add Unavailability");
         btnAddUnavailability.setToolTipText("");
         getContentPane().add(btnAddUnavailability);
-        btnAddUnavailability.setBounds(310, 240, 300, 23);
+        btnAddUnavailability.setBounds(350, 240, 140, 23);
         getContentPane().add(txtName);
         txtName.setBounds(130, 120, 130, 20);
 
@@ -121,15 +112,15 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         jScrollPane1.setViewportView(tableBookings);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(709, 106, 320, 120);
+        jScrollPane1.setBounds(40, 310, 950, 150);
 
         comboRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(comboRoom);
-        comboRoom.setBounds(443, 125, 170, 20);
+        comboRoom.setBounds(490, 120, 170, 20);
 
         jLabel3.setText("Room:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(310, 130, 100, 14);
+        jLabel3.setBounds(350, 130, 100, 14);
 
         jLabel4.setText("Spaces:");
         getContentPane().add(jLabel4);
@@ -149,37 +140,37 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
 
         spinUnavailableFrom.setModel(new javax.swing.SpinnerDateModel());
         getContentPane().add(spinUnavailableFrom);
-        spinUnavailableFrom.setBounds(441, 156, 170, 30);
+        spinUnavailableFrom.setBounds(490, 150, 170, 30);
 
         jLabel6.setText("Unavailable From:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(310, 160, 120, 20);
+        jLabel6.setBounds(350, 160, 120, 20);
 
         jLabel7.setText("Until:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(310, 210, 90, 14);
+        jLabel7.setBounds(350, 210, 90, 14);
 
         spinUnavailableUntil.setModel(new javax.swing.SpinnerDateModel());
         getContentPane().add(spinUnavailableUntil);
-        spinUnavailableUntil.setBounds(440, 200, 170, 30);
+        spinUnavailableUntil.setBounds(490, 200, 170, 30);
 
         spinTermBeginning.setModel(new javax.swing.SpinnerDateModel());
         spinTermBeginning.setEditor(new javax.swing.JSpinner.DateEditor(spinTermBeginning,spinTermBeginningModel.toPattern()));
         getContentPane().add(spinTermBeginning);
-        spinTermBeginning.setBounds(100, 340, 150, 30);
+        spinTermBeginning.setBounds(840, 130, 150, 30);
 
         jLabel8.setText("Term Beginning:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 350, 77, 14);
+        jLabel8.setBounds(750, 140, 77, 14);
 
         jLabel9.setText("Term Ending:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 410, 70, 14);
+        jLabel9.setBounds(750, 200, 70, 14);
 
         spinTermEnding.setModel(new javax.swing.SpinnerDateModel());
         spinTermEnding.setEditor(new javax.swing.JSpinner.DateEditor(spinTermEnding,spinTermEndingModel.toPattern()));
         getContentPane().add(spinTermEnding);
-        spinTermEnding.setBounds(100, 400, 150, 30);
+        spinTermEnding.setBounds(840, 190, 150, 30);
 
         btnAddTermDate.setText("Add Term Dates");
         btnAddTermDate.addActionListener(new java.awt.event.ActionListener() {
@@ -188,14 +179,14 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
             }
         });
         getContentPane().add(btnAddTermDate);
-        btnAddTermDate.setBounds(10, 450, 240, 23);
+        btnAddTermDate.setBounds(750, 240, 240, 23);
+
+        btnDeleteRoom.setText("Delete Selected Room");
+        getContentPane().add(btnDeleteRoom);
+        btnDeleteRoom.setBounds(510, 240, 150, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSeeBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeBookingsActionPerformed
-        //tbi
-    }//GEN-LAST:event_btnSeeBookingsActionPerformed
 
     private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
         
@@ -203,10 +194,18 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         if (spaces > 0)
         {
             int selectedIndex = comboRoomType.getSelectedIndex();
+            String roomName = txtName.getName();
+            if (isRoomNameUnique(roomName)) 
+            {
             TypeOfRoom roomType = (selectedIndex == 0) ? TypeOfRoom.COMPUTER_LAB : (selectedIndex == 1) ? TypeOfRoom.TUTORIAL_ROOM : (selectedIndex == 2) ? TypeOfRoom.LECTURE_THEATRE : null;
-            OneRoom newRoom = new OneRoom(txtName.getText(),roomType,spaces);
+            OneRoom newRoom = new OneRoom(roomName,roomType,spaces);
             sharedData.addRoom(newRoom);
             JOptionPane.showMessageDialog(null, "Room Added!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Room Not Added. Room with the same name already exists!");
+            }
         }
         else
         {
@@ -214,6 +213,21 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
         }
     }//GEN-LAST:event_btnAddRoomActionPerformed
 
+    private boolean isRoomNameUnique(String roomName)
+    {
+        ArrayList<OneBooking> bookings = new ArrayList<OneBooking>();
+        for (OneBooking booking : bookings)
+        {
+            if (booking.RoomName.equals(roomName))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+    
     private void btnAddTermDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTermDateActionPerformed
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String textTermBeginning = ((JSpinner.DefaultEditor)spinTermBeginning.getEditor()).getTextField().getText();
@@ -268,10 +282,10 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
 
     @Override
     public void update(Observable o, Object arg) {
-        updateSharedBookings();
+        updateSharedData();
     }
     
-    public void updateSharedBookings()
+    public void updateSharedData()
     {
         addRoomsToComboBox();
         addBookingsToTable();
@@ -303,7 +317,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable,Obser
     private javax.swing.JButton btnAddRoom;
     private javax.swing.JButton btnAddTermDate;
     private javax.swing.JButton btnAddUnavailability;
-    private javax.swing.JButton btnSeeBookings;
+    private javax.swing.JButton btnDeleteRoom;
     private javax.swing.JComboBox<String> comboRoom;
     private javax.swing.JComboBox<String> comboRoomType;
     private javax.swing.JLabel jLabel1;

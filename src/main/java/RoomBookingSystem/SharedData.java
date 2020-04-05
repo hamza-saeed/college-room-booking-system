@@ -55,5 +55,7 @@ public class SharedData extends Observable {
     public void addTerm(OneTerm newTerm)
     {
         listOfTerms.add(newTerm);
+        setChanged();
+        notifyObservers();
     }
 }
