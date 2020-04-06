@@ -12,9 +12,9 @@ package RoomBookingSystem;
  */
 public class OneRoom {
     
-    String RoomName;
-    TypeOfRoom RoomType;
-    int Spaces;
+    private String RoomName;
+    private TypeOfRoom RoomType;
+    private int Spaces;
     
     public OneRoom(String roomName, TypeOfRoom roomType, int spaces)
     {

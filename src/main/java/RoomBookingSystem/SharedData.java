@@ -5,6 +5,7 @@
  */
 package RoomBookingSystem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -35,6 +36,20 @@ public class SharedData extends Observable {
         notifyObservers();
     }
     
+    public void removeRoom(String roomName)
+    {
+        for (int i = 0; i < listOfRooms.size(); i++)
+        {
+            OneRoom room = listOfRooms.get(i);
+            if (room.getRoomName().equals(roomName))
+            {
+                listOfRooms.remove(room);
+            }
+        }
+        setChanged();
+        notifyObservers();
+    }
+    
     public ArrayList<OneBooking> getTheBookings()
     {
         return listOfBookings;
@@ -47,6 +62,20 @@ public class SharedData extends Observable {
         notifyObservers();
     }
     
+    public void removeBooking(OneRoom room, LocalDate date, TimeOfDay time)
+    {
+        for (int i = 0; i < listOfBookings.size(); i++)
+        {
+            OneBooking booking = listOfBookings.get(i);
+            if ((booking.getRoom().getRoomName().equals(room.getRoomName())) && (booking.getBookingDate().isEqual(date)) && (booking.getBookingTime().equals(time)))
+            {
+                listOfBookings.remove(booking);
+            }
+        }
+        setChanged();
+        notifyObservers();
+    }
+    
     public ArrayList<OneTerm> getTheTerms()
     {
         return listOfTerms;
@@ -55,6 +84,20 @@ public class SharedData extends Observable {
     public void addTerm(OneTerm newTerm)
     {
         listOfTerms.add(newTerm);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public void removeTerm(LocalDate termBeginning, LocalDate termEnding)
+    {
+        for (int i = 0; i < listOfTerms.size(); i++)
+        {
+            OneTerm term = listOfTerms.get(i);
+            if (term.getTermBeginning().isEqual(termBeginning) && (term.getTermEnding().isEqual(termEnding)))
+            {
+                listOfTerms.remove(term);
+            }
+        }
         setChanged();
         notifyObservers();
     }

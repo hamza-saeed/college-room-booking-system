@@ -13,8 +13,8 @@ import java.time.LocalDate;
  */
 public class OneTerm {
     
-    LocalDate TermBeginning;
-    LocalDate TermEnding;
+    private LocalDate TermBeginning;
+    private LocalDate TermEnding;
     
     public OneTerm(LocalDate termBeginning, LocalDate termEnding)
     {

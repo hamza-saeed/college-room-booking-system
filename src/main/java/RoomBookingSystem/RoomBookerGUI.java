@@ -73,7 +73,15 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
             new String [] {
                 "Name", "Date", "Time", "Spaces", "Type"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableAvailability);
 
         spinDateFilter.setModel(new javax.swing.SpinnerDateModel());
@@ -107,43 +115,45 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEmail)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPhone)
-                    .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(266, 266, 266)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(148, 148, 148)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnFindRooms))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(341, 341, 341)
+                                .addComponent(btnBookSelectedRoom)))
+                        .addGap(0, 193, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnFindRooms))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(341, 341, 341)
-                        .addComponent(btnBookSelectedRoom)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                                    .addComponent(txtEmail))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                                    .addComponent(txtNotes)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,25 +201,38 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
             String bookerPhone = txtPhone.getText();
             String bookingNotes = txtNotes.getText();
             if (!doesBookingExist(roomName, bookingDate, bookingTime)) {
-                OneBooking newBooking = new OneBooking(roomName, bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
+                OneBooking newBooking = new OneBooking(getRoomFromName(roomName), bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
                 sharedData.addBooking(newBooking);
                 JOptionPane.showMessageDialog(null, "Booking Added!");
             } else {
                 JOptionPane.showMessageDialog(null, "Booking Not Added! Someone already booked this!");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Booking Not Added! A Booking Time Must Be Selected!");
+            JOptionPane.showMessageDialog(null, "Booking Not Added! A Booking Date/Time Must Be Selected!");
         }
     }//GEN-LAST:event_btnBookSelectedRoomActionPerformed
 
+    private OneRoom getRoomFromName(String name)
+    {
+        ArrayList<OneRoom> rooms = sharedData.getTheRooms();
+        for (OneRoom room : rooms)
+        {
+            if (room.getRoomName().equals(name))
+            {
+                return room;
+            }
+        }
+        return null;
+    }
+    
+    
     public boolean doesBookingExist(String roomName, LocalDate bookingDate, TimeOfDay bookingTime) {
         ArrayList<OneBooking> bookings = sharedData.getTheBookings();
         for (OneBooking booking : bookings) {
-            if (booking.RoomName.equals(roomName) && booking.BookingDate.isEqual(bookingDate) && (booking.BookingTime.equals(bookingTime))) {
+            if (booking.getRoom().getRoomName().equals(roomName) && booking.getBookingDate().isEqual(bookingDate) && (booking.getBookingTime().equals(bookingTime))) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -226,7 +249,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         ArrayList<AvailableRoom> availableRooms = getAvailableBookingsOnDay(dateFilter);
         model.setRowCount(0);
         for (AvailableRoom availRoom : availableRooms) {
-            model.addRow(new Object[]{availRoom.RoomName, textDateFilter, availRoom.DayTime, "30", "sdffd"});
+            model.addRow(new Object[]{availRoom.getRoom().getRoomName(), textDateFilter, availRoom.getDayTime(), availRoom.getRoom().getSpaces(), availRoom.getRoom().getTypeOfRoom()});
         }
     }
 
@@ -257,7 +280,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         for (OneRoom room : rooms) {
             for (TimeOfDay time : times) {
                 if (!doesBookingExist(room.getRoomName(), date, time)) {
-                    AvailableRoom availRoom = new AvailableRoom(time, room.getRoomName());
+                    AvailableRoom availRoom = new AvailableRoom(time, getRoomFromName(room.getRoomName()));
                     availableRooms.add(availRoom);
                 }
             }
@@ -270,10 +293,11 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         boolean dateWithinTerm = false;
 
         for (OneTerm term : terms) {
-            if (date.isAfter(term.TermBeginning) && date.isBefore(term.TermEnding)) {
+            if ((date.isAfter(term.getTermBeginning()) && date.isBefore(term.getTermEnding())) || (date.isEqual(term.getTermBeginning())) || (date.isEqual(term.getTermEnding()))) {
                 dateWithinTerm = true;
             }
         }
+        
         return dateWithinTerm;
     }
 
@@ -313,20 +337,20 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
 
 class AvailableRoom {
 
-    TimeOfDay DayTime;
-    String RoomName;
+    private TimeOfDay DayTime;
+    private OneRoom Room;
 
-    public AvailableRoom(TimeOfDay dayTime, String roomName) {
+    public AvailableRoom(TimeOfDay dayTime, OneRoom room) {
         DayTime = dayTime;
-        RoomName = roomName;
+        Room = room;
     }
 
     public TimeOfDay getDayTime() {
         return DayTime;
     }
 
-    public String getRoomName() {
-        return RoomName;
+    public OneRoom getRoom() {
+        return Room;
     }
-
+    
 }
