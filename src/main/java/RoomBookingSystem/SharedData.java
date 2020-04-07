@@ -18,6 +18,7 @@ public class SharedData extends Observable {
     private ArrayList<OneRoom> listOfRooms = new ArrayList<OneRoom>();
     private ArrayList<OneBooking> listOfBookings = new ArrayList<OneBooking>();
     private ArrayList<OneTerm> listOfTerms = new ArrayList<OneTerm>();
+    private ArrayList<OneUnavailability> listOfUnavailabilities = new ArrayList<OneUnavailability>();
     
     public SharedData()
     {
@@ -101,4 +102,31 @@ public class SharedData extends Observable {
         setChanged();
         notifyObservers();
     }
+    
+    public ArrayList<OneUnavailability> getTheUnavailabilities()
+    {
+        return listOfUnavailabilities;
+    }
+    
+    public void addUnavailability(OneUnavailability newUnavailability)
+    {
+        listOfUnavailabilities.add(newUnavailability);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public void removeUnavailability(OneRoom room, LocalDate unavailStart, LocalDate unavailEnd)
+    {
+        for (int i = 0; i < listOfUnavailabilities.size(); i++)
+        {
+            OneUnavailability unavailability = listOfUnavailabilities.get(i);
+            if (unavailability.getRoom().equals(room) && unavailability.returnUnavailStart().isEqual(unavailStart) && unavailability.returnUnavailEnd().isEqual(unavailEnd))
+            {
+                listOfUnavailabilities.remove(unavailability);
+            }
+        }
+        setChanged();
+        notifyObservers();
+    }
+    
 }

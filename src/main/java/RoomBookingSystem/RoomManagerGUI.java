@@ -46,6 +46,8 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -58,13 +60,6 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableRooms = new javax.swing.JTable();
-        SimpleDateFormat spinDateModel = new SimpleDateFormat("dd/MM/yyyy");
-        spinUnavailableFrom = new javax.swing.JSpinner();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        SimpleDateFormat spinDateModel2 = new SimpleDateFormat("dd/MM/yyyy");
-        spinUnavailableUntil = new javax.swing.JSpinner();
-        btnAddUnavailability = new javax.swing.JButton();
         btnDeleteRoom = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,6 +76,34 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jScrollPane3 = new javax.swing.JScrollPane();
         tableTerms = new javax.swing.JTable();
         btnRemoveTerm = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        SimpleDateFormat spinDateModel = new SimpleDateFormat("dd/MM/yyyy");
+        spinUnavailableFrom = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        SimpleDateFormat spinDateModel2 = new SimpleDateFormat("dd/MM/yyyy");
+        spinUnavailableUntil = new javax.swing.JSpinner();
+        btnAddUnavailability = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tableUnavailability = new javax.swing.JTable();
+        btnDeleteUnavailability = new javax.swing.JButton();
+        txtReason = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        comboRoom = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 320));
@@ -90,7 +113,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Room Manager");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(270, 20, 274, 44);
+        jLabel1.setBounds(280, 10, 274, 44);
 
         btnAddRoom.setText("Add Room");
         btnAddRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -127,19 +150,6 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         });
         jScrollPane2.setViewportView(tableRooms);
 
-        spinUnavailableFrom.setModel(new javax.swing.SpinnerDateModel());
-        spinUnavailableFrom.setEditor(new javax.swing.JSpinner.DateEditor(spinUnavailableFrom,spinDateModel.toPattern()));
-
-        jLabel6.setText("Unavailable From:");
-
-        jLabel7.setText("Until:");
-
-        spinUnavailableUntil.setModel(new javax.swing.SpinnerDateModel());
-        spinUnavailableUntil.setEditor(new javax.swing.JSpinner.DateEditor(spinUnavailableUntil,spinDateModel2.toPattern()));
-
-        btnAddUnavailability.setText("Add Unavailability");
-        btnAddUnavailability.setToolTipText("");
-
         btnDeleteRoom.setText("Delete Selected Room");
         btnDeleteRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,58 +181,37 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAddUnavailability, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(188, 188, 188))))
+                        .addGap(184, 184, 184))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(comboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(13, 13, 13)
-                                .addComponent(spinRoomSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteRoom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)
-                        .addComponent(btnAddUnavailability))
-                    .addComponent(btnAddRoom))
-                .addGap(19, 19, 19))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(66, 66, 66)
+                            .addComponent(jLabel4))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5))
+                            .addGap(13, 13, 13)
+                            .addComponent(spinRoomSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddRoom)
+                    .addComponent(btnDeleteRoom))
+                .addGap(26, 26, 26))
         );
 
         jTabbedPane1.addTab("Rooms", jPanel2);
@@ -262,7 +251,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnDeleteBooking)
                 .addGap(13, 13, 13))
         );
@@ -339,7 +328,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,6 +349,119 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         );
 
         jTabbedPane1.addTab("Terms", jPanel3);
+
+        jLabel6.setText("From:");
+
+        spinUnavailableFrom.setModel(new javax.swing.SpinnerDateModel());
+        spinUnavailableFrom.setEditor(new javax.swing.JSpinner.DateEditor(spinUnavailableFrom,spinDateModel.toPattern()));
+
+        jLabel7.setText("Until:");
+
+        spinUnavailableUntil.setModel(new javax.swing.SpinnerDateModel());
+        spinUnavailableUntil.setEditor(new javax.swing.JSpinner.DateEditor(spinUnavailableUntil,spinDateModel2.toPattern()));
+
+        btnAddUnavailability.setText("Add Unavailability");
+        btnAddUnavailability.setToolTipText("");
+        btnAddUnavailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddUnavailabilityActionPerformed(evt);
+            }
+        });
+
+        tableUnavailability.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room Name", "Unavailability Start", "Unavailability End", "Reason"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tableUnavailability);
+
+        btnDeleteUnavailability.setText("Delete Selected Unavailability");
+        btnDeleteUnavailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteUnavailabilityActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Reason:");
+
+        jLabel10.setText("Room:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboRoom, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtReason, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAddUnavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(btnDeleteUnavailability))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(btnDeleteUnavailability)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10))
+                            .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)))
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnAddUnavailability)
+                        .addGap(24, 24, 24))))
+        );
+
+        jTabbedPane1.addTab("Mark Room as Unavailable", jPanel4);
 
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(20, 50, 780, 220);
@@ -415,14 +517,11 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
 
     private void btnDeleteRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRoomActionPerformed
         int row = tableRooms.getSelectedRow();
-        if (row != -1)
-        {
+        if (row != -1) {
             String roomName = tableRooms.getModel().getValueAt(row, 0).toString();
             sharedData.removeRoom(roomName);
             JOptionPane.showMessageDialog(null, "Room Removed!");
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Booking Not Removed! A Booking Date/Time Must Be Selected!");
         }
     }//GEN-LAST:event_btnDeleteRoomActionPerformed
@@ -430,15 +529,12 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private void btnRemoveTermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTermActionPerformed
         int row = tableTerms.getSelectedRow();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (row != -1)
-        {
-            LocalDate termBeginning = LocalDate.parse(tableTerms.getModel().getValueAt(row, 0).toString(),formatter);
-            LocalDate termEnding = LocalDate.parse(tableTerms.getModel().getValueAt(row, 1).toString(),formatter);
+        if (row != -1) {
+            LocalDate termBeginning = LocalDate.parse(tableTerms.getModel().getValueAt(row, 0).toString(), formatter);
+            LocalDate termEnding = LocalDate.parse(tableTerms.getModel().getValueAt(row, 1).toString(), formatter);
             sharedData.removeTerm(termBeginning, termEnding);
             JOptionPane.showMessageDialog(null, "Term Removed!");
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Term Not Removed! A Term Must Be Selected!");
         }
     }//GEN-LAST:event_btnRemoveTermActionPerformed
@@ -447,9 +543,9 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         int row = tableBookings.getSelectedRow();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (row != 1) {
-            String roomName = tableBookings.getModel().getValueAt(row,0).toString();
-            LocalDate bookingDate = LocalDate.parse(tableBookings.getModel().getValueAt(row,1).toString(),formatter);
-            String time =  tableBookings.getModel().getValueAt(row,2).toString();
+            String roomName = tableBookings.getModel().getValueAt(row, 0).toString();
+            LocalDate bookingDate = LocalDate.parse(tableBookings.getModel().getValueAt(row, 1).toString(), formatter);
+            String time = tableBookings.getModel().getValueAt(row, 2).toString();
             TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
             sharedData.removeBooking(getRoomFromName(roomName), bookingDate, bookingTime);
             JOptionPane.showMessageDialog(null, "Booking Removed!");
@@ -458,20 +554,49 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         }
     }//GEN-LAST:event_btnDeleteBookingActionPerformed
 
-    
-    private OneRoom getRoomFromName(String name)
-    {
+    private void btnDeleteUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUnavailabilityActionPerformed
+        int row = tableUnavailability.getSelectedRow();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (row != -1) {
+            String roomName = tableUnavailability.getModel().getValueAt(row, 0).toString();
+            LocalDate unavailStart = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 1).toString(), formatter);
+            LocalDate unavailEnd = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 2).toString(), formatter);
+            sharedData.removeUnavailability(getRoomFromName(roomName), unavailStart, unavailEnd);
+            JOptionPane.showMessageDialog(null, "Unavailability Removed!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Unavailability Not Removed! An Unavailability Must Be Selected!");
+        }
+
+    }//GEN-LAST:event_btnDeleteUnavailabilityActionPerformed
+
+    private void btnAddUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUnavailabilityActionPerformed
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String textUnavailStarting = ((JSpinner.DefaultEditor) spinUnavailableFrom.getEditor()).getTextField().getText();
+        String textUnavailEnding = ((JSpinner.DefaultEditor) spinUnavailableUntil.getEditor()).getTextField().getText();
+
+            String roomName = comboRoom.getSelectedItem().toString();
+            LocalDate unavailStartingDate = LocalDate.parse(textUnavailStarting, formatter);
+            LocalDate unavailEndingDate = LocalDate.parse(textUnavailEnding, formatter);
+
+            if (unavailEndingDate.isAfter(unavailStartingDate)) {
+                OneUnavailability newUnavail = new OneUnavailability(getRoomFromName(roomName), unavailStartingDate, unavailEndingDate, txtReason.getText());
+                sharedData.addUnavailability(newUnavail);
+                JOptionPane.showMessageDialog(null, "Unavailability Added!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be After Beginning!");
+            }
+    }//GEN-LAST:event_btnAddUnavailabilityActionPerformed
+
+    private OneRoom getRoomFromName(String name) {
         ArrayList<OneRoom> rooms = sharedData.getTheRooms();
-        for (OneRoom room : rooms)
-        {
-            if (room.getRoomName().equals(name))
-            {
+        for (OneRoom room : rooms) {
+            if (room.getRoomName().equals(name)) {
                 return room;
             }
         }
         return null;
     }
-    
+
     @Override
     public void run() {
         this.setVisible(true);
@@ -486,16 +611,22 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         addRoomsToTable();
         addBookingsToTable();
         addTermsToTable();
+        addUnavailabilitiesToTable();
     }
 
     public void addRoomsToTable() {
         ArrayList<OneRoom> rooms = sharedData.getTheRooms();
         DefaultTableModel model = (DefaultTableModel) tableRooms.getModel();
+        DefaultComboBoxModel  comboModel = (DefaultComboBoxModel)comboRoom.getModel();
+        comboModel.removeAllElements();
         model.setRowCount(0);
-        for (OneRoom room : rooms)
-        {
-            model.addRow(new Object[]{room.getRoomName(),room.getSpaces(),room.getTypeOfRoom()});
+        for (OneRoom room : rooms) {
+            model.addRow(new Object[]{room.getRoomName(), room.getSpaces(), room.getTypeOfRoom()});
+            comboModel.addElement(room.getRoomName());
         }
+        
+        
+        
     }
 
     public void addBookingsToTable() {
@@ -507,17 +638,27 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             model.addRow(new Object[]{booking.getRoom().getRoomName(), booking.getBookingDate().format(formatter), booking.getBookingTime().toString(), booking.getBookerName(), booking.getBookerEmail(), booking.getBookerPhone(), booking.getBookingNotes()});
         }
     }
-    
+
     public void addTermsToTable() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         ArrayList<OneTerm> terms = sharedData.getTheTerms();
         DefaultTableModel model = (DefaultTableModel) tableTerms.getModel();
         model.setRowCount(0);
         for (OneTerm term : terms) {
-            model.addRow(new Object[]{term.getTermBeginning().format(formatter),term.getTermEnding().format(formatter)});
+            model.addRow(new Object[]{term.getTermBeginning().format(formatter), term.getTermEnding().format(formatter)});
         }
     }
-            
+
+    public void addUnavailabilitiesToTable() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        ArrayList<OneUnavailability> unavailabilities = sharedData.getTheUnavailabilities();
+        DefaultTableModel model = (DefaultTableModel) tableUnavailability.getModel();
+        model.setRowCount(0);
+        for (OneUnavailability unavail : unavailabilities) {
+            model.addRow(new Object[]{unavail.getRoom().getRoomName(), unavail.returnUnavailStart().format(formatter), unavail.returnUnavailEnd().format(formatter), unavail.returnReason()});
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRoom;
@@ -525,10 +666,14 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private javax.swing.JButton btnAddUnavailability;
     private javax.swing.JButton btnDeleteBooking;
     private javax.swing.JButton btnDeleteRoom;
+    private javax.swing.JButton btnDeleteUnavailability;
     private javax.swing.JButton btnRemoveTerm;
+    private javax.swing.JComboBox<String> comboRoom;
     private javax.swing.JComboBox<String> comboRoomType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -538,10 +683,14 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JSpinner spinRoomSpaces;
     private javax.swing.JSpinner spinTermBeginning;
     private javax.swing.JSpinner spinTermEnding;
@@ -550,7 +699,9 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private javax.swing.JTable tableBookings;
     private javax.swing.JTable tableRooms;
     private javax.swing.JTable tableTerms;
+    private javax.swing.JTable tableUnavailability;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtReason;
     // End of variables declaration//GEN-END:variables
 
 }

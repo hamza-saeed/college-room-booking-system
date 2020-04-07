@@ -232,7 +232,25 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         }
         return false;
     }
-
+    
+    public boolean isRoomUnavailable(String roomName, LocalDate bookingDate)
+    {
+        ArrayList<OneUnavailability> unavailabilities = sharedData.getTheUnavailabilities();
+        for (OneUnavailability unavail : unavailabilities)
+        {
+            if ((unavail.getRoom().getRoomName().equals(roomName)) && (isWithin(bookingDate,unavail.returnUnavailStart(),unavail.returnUnavailEnd())))
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean isWithin(LocalDate bookingDate, LocalDate dateComp1, LocalDate dateCom2)
+    {
+            return ((bookingDate.isAfter(dateComp1) && bookingDate.isBefore(dateCom2)) || (bookingDate.isEqual(dateComp1)) || (bookingDate.isEqual(dateCom2)));
+    }
 
     private void btnFindRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRoomsActionPerformed
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -288,7 +306,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
 
         for (OneRoom room : rooms) {
             for (TimeOfDay time : times) {
-                if (!doesBookingExist(room.getRoomName(), date, time)) {
+                if (!doesBookingExist(room.getRoomName(), date, time) && (!isRoomUnavailable(room.getRoomName(),date))) {
                     AvailableRoom availRoom = new AvailableRoom(time, getRoomFromName(room.getRoomName()));
                     availableRooms.add(availRoom);
                 }
