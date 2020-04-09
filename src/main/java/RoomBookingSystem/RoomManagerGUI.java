@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RoomBookingSystem;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
@@ -25,10 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Observer {
 
     private SharedData sharedData;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    /**
-     * Creates new form RoomManagerGUI
-     */
     public RoomManagerGUI(SharedData initialBookings) {
         super();
         sharedData = initialBookings;
@@ -106,8 +97,8 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jScrollPane4.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(830, 320));
-        setSize(new java.awt.Dimension(830, 320));
+        setMinimumSize(new java.awt.Dimension(830, 330));
+        setSize(new java.awt.Dimension(830, 330));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -191,7 +182,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -251,7 +242,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeleteBooking)
                 .addGap(13, 13, 13))
         );
@@ -328,7 +319,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -402,9 +393,13 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(btnDeleteUnavailability))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel10))
@@ -424,21 +419,18 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                                 .addGap(18, 18, 18)
                                 .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40)
-                        .addComponent(btnAddUnavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(btnDeleteUnavailability))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnAddUnavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeleteUnavailability)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,148 +446,151 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                                 .addComponent(jLabel3))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))
-                        .addGap(7, 7, 7))
+                                .addComponent(jLabel7))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(btnAddUnavailability)
-                        .addGap(24, 24, 24))))
+                        .addGap(17, 17, 17)))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("Mark Room as Unavailable", jPanel4);
 
         getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(20, 50, 780, 220);
+        jTabbedPane1.setBounds(30, 60, 780, 220);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
-
+        //get details from inputs
         int spaces = Integer.parseInt(spinRoomSpaces.getValue().toString());
-        if (spaces > 0) {
-            int selectedIndex = comboRoomType.getSelectedIndex();
-            String roomName = txtName.getText();
-            if (isRoomNameUnique(roomName)) {
-                TypeOfRoom roomType = (selectedIndex == 0) ? TypeOfRoom.COMPUTER_LAB : (selectedIndex == 1) ? TypeOfRoom.TUTORIAL_ROOM : (selectedIndex == 2) ? TypeOfRoom.LECTURE_THEATRE : null;
-                OneRoom newRoom = new OneRoom(roomName, roomType, spaces);
-                sharedData.addRoom(newRoom);
-                JOptionPane.showMessageDialog(null, "Room Added!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Room Not Added. Room with the same name already exists!");
-            }
-        } else {
+        int selectedIndex = comboRoomType.getSelectedIndex();
+        String roomName = txtName.getText();
+        //show msg if number of spaces isn't 1+
+        if (spaces <= 0) {
             JOptionPane.showMessageDialog(null, "Room Not Added! Number of Spaces must be 1 or more!");
+            return;
         }
+        //make sure room name was entered
+        if (roomName.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Room Not Added! Room Name Must Be Entered!");
+            return;
+        }
+        //make sure room name is unique
+        if (!RoomManagerFunctions.isRoomNameUnique(sharedData.getTheRooms(), roomName)) {
+            JOptionPane.showMessageDialog(null, "Room Not Added. Room with the same name already exists!");
+            return;
+        }
+        TypeOfRoom roomType = (selectedIndex == 0) ? TypeOfRoom.COMPUTER_LAB : (selectedIndex == 1) ? TypeOfRoom.TUTORIAL_ROOM : (selectedIndex == 2) ? TypeOfRoom.LECTURE_THEATRE : null;
+        //Add Room
+        OneRoom newRoom = new OneRoom(roomName, roomType, spaces);
+        sharedData.addRoom(newRoom);
+        JOptionPane.showMessageDialog(null, "Room Added!");
+        txtName.setText("");
     }//GEN-LAST:event_btnAddRoomActionPerformed
 
-    private boolean isRoomNameUnique(String roomName) {
-        ArrayList<OneRoom> rooms = sharedData.getTheRooms();
-        for (OneRoom room : rooms) {
-            if (roomName.equals(room.getRoomName())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
     private void btnAddTermDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTermDateActionPerformed
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //get dates from input
         String textTermBeginning = ((JSpinner.DefaultEditor) spinTermBeginning.getEditor()).getTextField().getText();
         String textTermEnding = ((JSpinner.DefaultEditor) spinTermEnding.getEditor()).getTextField().getText();
-
         LocalDate termBeginningDate = LocalDate.parse(textTermBeginning, formatter);
         LocalDate termEndingDate = LocalDate.parse(textTermEnding, formatter);
-        if (termEndingDate.isAfter(termBeginningDate)) {
-            OneTerm newTerm = new OneTerm(termBeginningDate, termEndingDate);
-            sharedData.addTerm(newTerm);
-            JOptionPane.showMessageDialog(null, "Term Added!");
-        } else {
+        //ensure ending date is after start date
+        if (termBeginningDate.isAfter(termEndingDate)) {
             JOptionPane.showMessageDialog(null, "Term Not Added. Ending Date Must Be After Beginning!");
+            return;
         }
+        //add term
+        OneTerm newTerm = new OneTerm(termBeginningDate, termEndingDate);
+        sharedData.addTerm(newTerm);
+        JOptionPane.showMessageDialog(null, "Term Added!");
+
     }//GEN-LAST:event_btnAddTermDateActionPerformed
 
     private void btnDeleteRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRoomActionPerformed
+        //make sure a row has been selected
         int row = tableRooms.getSelectedRow();
-        if (row != -1) {
-            String roomName = tableRooms.getModel().getValueAt(row, 0).toString();
-            sharedData.removeRoom(roomName);
-            JOptionPane.showMessageDialog(null, "Room Removed!");
-        } else {
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Booking Not Removed! A Booking Date/Time Must Be Selected!");
+            return;
         }
+        String roomName = tableRooms.getModel().getValueAt(row, 0).toString();
+        //remove from the list
+        sharedData.removeRoom(roomName);
+        JOptionPane.showMessageDialog(null, "Room Removed!");
     }//GEN-LAST:event_btnDeleteRoomActionPerformed
 
     private void btnRemoveTermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTermActionPerformed
+        //make sure a row has been selected
         int row = tableTerms.getSelectedRow();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (row != -1) {
-            LocalDate termBeginning = LocalDate.parse(tableTerms.getModel().getValueAt(row, 0).toString(), formatter);
-            LocalDate termEnding = LocalDate.parse(tableTerms.getModel().getValueAt(row, 1).toString(), formatter);
-            sharedData.removeTerm(termBeginning, termEnding);
-            JOptionPane.showMessageDialog(null, "Term Removed!");
-        } else {
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Term Not Removed! A Term Must Be Selected!");
+            return;
         }
+        //get data from inputs
+        LocalDate termBeginning = LocalDate.parse(tableTerms.getModel().getValueAt(row, 0).toString(), formatter);
+        LocalDate termEnding = LocalDate.parse(tableTerms.getModel().getValueAt(row, 1).toString(), formatter);
+        //remove selected term
+        sharedData.removeTerm(termBeginning, termEnding);
+        JOptionPane.showMessageDialog(null, "Term Removed!");
+
+
     }//GEN-LAST:event_btnRemoveTermActionPerformed
 
     private void btnDeleteBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookingActionPerformed
         int row = tableBookings.getSelectedRow();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (row != 1) {
-            String roomName = tableBookings.getModel().getValueAt(row, 0).toString();
-            LocalDate bookingDate = LocalDate.parse(tableBookings.getModel().getValueAt(row, 1).toString(), formatter);
-            String time = tableBookings.getModel().getValueAt(row, 2).toString();
-            TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
-            sharedData.removeBooking(getRoomFromName(roomName), bookingDate, bookingTime);
-            JOptionPane.showMessageDialog(null, "Booking Removed!");
-        } else {
+        //make sure a row has been selected
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Booking Not Removed! A Booking Must Be Selected!");
+            return;
         }
+        //get data from inputs
+        String roomName = tableBookings.getModel().getValueAt(row, 0).toString();
+        LocalDate bookingDate = LocalDate.parse(tableBookings.getModel().getValueAt(row, 1).toString(), formatter);
+        String time = tableBookings.getModel().getValueAt(row, 2).toString();
+        TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
+        //remove selected booking
+        sharedData.removeBooking(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), bookingDate, bookingTime);
+        JOptionPane.showMessageDialog(null, "Booking Removed!");
+
     }//GEN-LAST:event_btnDeleteBookingActionPerformed
 
     private void btnDeleteUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUnavailabilityActionPerformed
         int row = tableUnavailability.getSelectedRow();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (row != -1) {
-            String roomName = tableUnavailability.getModel().getValueAt(row, 0).toString();
-            LocalDate unavailStart = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 1).toString(), formatter);
-            LocalDate unavailEnd = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 2).toString(), formatter);
-            sharedData.removeUnavailability(getRoomFromName(roomName), unavailStart, unavailEnd);
-            JOptionPane.showMessageDialog(null, "Unavailability Removed!");
-        } else {
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Unavailability Not Removed! An Unavailability Must Be Selected!");
+            return;
         }
+        //get data from inputs
+        String roomName = tableUnavailability.getModel().getValueAt(row, 0).toString();
+        LocalDate unavailStart = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 1).toString(), formatter);
+        LocalDate unavailEnd = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 2).toString(), formatter);
+        //remove selected unavailability
+        sharedData.removeUnavailability(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), unavailStart, unavailEnd);
+        JOptionPane.showMessageDialog(null, "Unavailability Removed!");
 
     }//GEN-LAST:event_btnDeleteUnavailabilityActionPerformed
 
     private void btnAddUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUnavailabilityActionPerformed
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //get data from inputs
         String textUnavailStarting = ((JSpinner.DefaultEditor) spinUnavailableFrom.getEditor()).getTextField().getText();
         String textUnavailEnding = ((JSpinner.DefaultEditor) spinUnavailableUntil.getEditor()).getTextField().getText();
-
-            String roomName = comboRoom.getSelectedItem().toString();
-            LocalDate unavailStartingDate = LocalDate.parse(textUnavailStarting, formatter);
-            LocalDate unavailEndingDate = LocalDate.parse(textUnavailEnding, formatter);
-
-            if (unavailEndingDate.isAfter(unavailStartingDate)) {
-                OneUnavailability newUnavail = new OneUnavailability(getRoomFromName(roomName), unavailStartingDate, unavailEndingDate, txtReason.getText());
-                sharedData.addUnavailability(newUnavail);
-                JOptionPane.showMessageDialog(null, "Unavailability Added!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be After Beginning!");
-            }
+        String roomName = comboRoom.getSelectedItem().toString();
+        LocalDate unavailStartingDate = LocalDate.parse(textUnavailStarting, formatter);
+        LocalDate unavailEndingDate = LocalDate.parse(textUnavailEnding, formatter);
+        //ensure ending date is after starting date
+        if (unavailStartingDate.isAfter(unavailEndingDate)) {
+            JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be After Beginning!");
+            return;
+        }
+        //add new unavailability
+        OneUnavailability newUnavail = new OneUnavailability(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), unavailStartingDate, unavailEndingDate, txtReason.getText());
+        sharedData.addUnavailability(newUnavail);
+        JOptionPane.showMessageDialog(null, "Unavailability Added!");
+        txtReason.setText("");
     }//GEN-LAST:event_btnAddUnavailabilityActionPerformed
 
-    private OneRoom getRoomFromName(String name) {
-        ArrayList<OneRoom> rooms = sharedData.getTheRooms();
-        for (OneRoom room : rooms) {
-            if (room.getRoomName().equals(name)) {
-                return room;
-            }
-        }
-        return null;
-    }
+
 
     @Override
     public void run() {
@@ -608,6 +603,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     }
 
     public void updateSharedData() {
+        //update screen when change is made to a list
         addRoomsToTable();
         addBookingsToTable();
         addTermsToTable();
@@ -615,22 +611,20 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     }
 
     public void addRoomsToTable() {
+        //clear elements and add all rooms to the table and combo box
         ArrayList<OneRoom> rooms = sharedData.getTheRooms();
         DefaultTableModel model = (DefaultTableModel) tableRooms.getModel();
-        DefaultComboBoxModel  comboModel = (DefaultComboBoxModel)comboRoom.getModel();
+        DefaultComboBoxModel<String> comboModel = (DefaultComboBoxModel) comboRoom.getModel();
         comboModel.removeAllElements();
         model.setRowCount(0);
         for (OneRoom room : rooms) {
             model.addRow(new Object[]{room.getRoomName(), room.getSpaces(), room.getTypeOfRoom()});
             comboModel.addElement(room.getRoomName());
         }
-        
-        
-        
     }
 
     public void addBookingsToTable() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //clear elements and add all bookings to the table
         ArrayList<OneBooking> bookings = sharedData.getTheBookings();
         DefaultTableModel model = (DefaultTableModel) tableBookings.getModel();
         model.setRowCount(0);
@@ -640,7 +634,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     }
 
     public void addTermsToTable() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //clear elements and add all terms to the table
         ArrayList<OneTerm> terms = sharedData.getTheTerms();
         DefaultTableModel model = (DefaultTableModel) tableTerms.getModel();
         model.setRowCount(0);
@@ -650,7 +644,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     }
 
     public void addUnavailabilitiesToTable() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //clear elements and add all unavailabilities to the table
         ArrayList<OneUnavailability> unavailabilities = sharedData.getTheUnavailabilities();
         DefaultTableModel model = (DefaultTableModel) tableUnavailability.getModel();
         model.setRowCount(0);
