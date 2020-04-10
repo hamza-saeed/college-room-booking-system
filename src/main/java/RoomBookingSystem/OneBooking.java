@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class OneBooking {
     
-    private OneRoom Room;
+    private String RoomName;
     private String BookerName;
     private String BookerEmail;
     private String BookerPhone;
@@ -22,9 +22,9 @@ public class OneBooking {
     private LocalDate BookingDate;
     private TimeOfDay BookingTime;
     
-    public OneBooking(OneRoom room, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes,LocalDate bookingDate, TimeOfDay bookingTime)
+    public OneBooking(String roomName, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes,LocalDate bookingDate, TimeOfDay bookingTime)
     {
-        Room = room;
+        RoomName = roomName;
         BookerName = bookerName;
         BookerEmail = bookerEmail;
         BookerPhone = bookerPhone;
@@ -33,9 +33,9 @@ public class OneBooking {
         BookingTime = bookingTime;
     }
     
-    public OneRoom getRoom()
+    public String getRoomName()
     {
-        return Room;
+        return RoomName;
     }
     
     public String getBookerName()

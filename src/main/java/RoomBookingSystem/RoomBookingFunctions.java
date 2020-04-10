@@ -24,7 +24,7 @@ public class RoomBookingFunctions {
     public static boolean doesBookingExist(ArrayList<OneBooking> bookings, String roomName, LocalDate bookingDate, TimeOfDay bookingTime) {
         //iterate through bookings and return true if found, false if not found 
         for (OneBooking booking : bookings) {
-            if (booking.getRoom().getRoomName().equals(roomName) && booking.getBookingDate().isEqual(bookingDate) && (booking.getBookingTime().equals(bookingTime))) {
+            if (booking.getRoomName().equals(roomName) && booking.getBookingDate().isEqual(bookingDate) && (booking.getBookingTime().equals(bookingTime))) {
                 return true;
             }
         }
@@ -35,7 +35,7 @@ public class RoomBookingFunctions {
     public static boolean isRoomUnavailable(ArrayList<OneUnavailability> unavailabilities, String roomName, LocalDate bookingDate) {
         //iterate through unavailabilities to see if there is a match
         for (OneUnavailability unavail : unavailabilities) {
-            if ((unavail.getRoom().getRoomName().equals(roomName)) && (isWithin(bookingDate, unavail.returnUnavailStart(), unavail.returnUnavailEnd()))) {
+            if ((unavail.getRoomName().equals(roomName)) && (isWithin(bookingDate, unavail.returnUnavailStart(), unavail.returnUnavailEnd()))) {
                 return true;
             }
         }
@@ -87,6 +87,12 @@ public class RoomBookingFunctions {
             }
         }
         return availableRooms;
+    }
+    
+    public static TimeOfDay returnTimeFromString(String time)
+    {
+        TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
+        return bookingTime;
     }
 }
 

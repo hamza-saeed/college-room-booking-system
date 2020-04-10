@@ -550,7 +550,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         String time = tableBookings.getModel().getValueAt(row, 2).toString();
         TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
         //remove selected booking
-        sharedData.removeBooking(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), bookingDate, bookingTime);
+        sharedData.removeBooking(roomName, bookingDate, bookingTime);
         JOptionPane.showMessageDialog(null, "Booking Removed!");
 
     }//GEN-LAST:event_btnDeleteBookingActionPerformed
@@ -566,12 +566,19 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         LocalDate unavailStart = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 1).toString(), formatter);
         LocalDate unavailEnd = LocalDate.parse(tableUnavailability.getModel().getValueAt(row, 2).toString(), formatter);
         //remove selected unavailability
-        sharedData.removeUnavailability(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), unavailStart, unavailEnd);
+        sharedData.removeUnavailability(roomName, unavailStart, unavailEnd);
         JOptionPane.showMessageDialog(null, "Unavailability Removed!");
 
     }//GEN-LAST:event_btnDeleteUnavailabilityActionPerformed
 
     private void btnAddUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUnavailabilityActionPerformed
+        int row = comboRoom.getSelectedIndex();
+        //ensure a room is selected
+        if (row == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Unavailability Not Added. Room Must Be Selected!");
+            return;  
+        }
         //get data from inputs
         String textUnavailStarting = ((JSpinner.DefaultEditor) spinUnavailableFrom.getEditor()).getTextField().getText();
         String textUnavailEnding = ((JSpinner.DefaultEditor) spinUnavailableUntil.getEditor()).getTextField().getText();
@@ -583,8 +590,8 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be After Beginning!");
             return;
         }
-        //add new unavailability
-        OneUnavailability newUnavail = new OneUnavailability(RoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),roomName), unavailStartingDate, unavailEndingDate, txtReason.getText());
+        //add new unavailabilityRoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),
+        OneUnavailability newUnavail = new OneUnavailability(roomName, unavailStartingDate, unavailEndingDate, txtReason.getText());
         sharedData.addUnavailability(newUnavail);
         JOptionPane.showMessageDialog(null, "Unavailability Added!");
         txtReason.setText("");
@@ -629,7 +636,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         DefaultTableModel model = (DefaultTableModel) tableBookings.getModel();
         model.setRowCount(0);
         for (OneBooking booking : bookings) {
-            model.addRow(new Object[]{booking.getRoom().getRoomName(), booking.getBookingDate().format(formatter), booking.getBookingTime().toString(), booking.getBookerName(), booking.getBookerEmail(), booking.getBookerPhone(), booking.getBookingNotes()});
+            model.addRow(new Object[]{booking.getRoomName(), booking.getBookingDate().format(formatter), booking.getBookingTime().toString(), booking.getBookerName(), booking.getBookerEmail(), booking.getBookerPhone(), booking.getBookingNotes()});
         }
     }
 
@@ -649,7 +656,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         DefaultTableModel model = (DefaultTableModel) tableUnavailability.getModel();
         model.setRowCount(0);
         for (OneUnavailability unavail : unavailabilities) {
-            model.addRow(new Object[]{unavail.getRoom().getRoomName(), unavail.returnUnavailStart().format(formatter), unavail.returnUnavailEnd().format(formatter), unavail.returnReason()});
+            model.addRow(new Object[]{unavail.getRoomName(), unavail.returnUnavailStart().format(formatter), unavail.returnUnavailEnd().format(formatter), unavail.returnReason()});
         }
     }
 

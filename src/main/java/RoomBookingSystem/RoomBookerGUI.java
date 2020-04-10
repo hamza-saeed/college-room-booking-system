@@ -196,14 +196,14 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         String roomName = tableAvailability.getModel().getValueAt(row, 0).toString();
         LocalDate bookingDate = LocalDate.parse(tableAvailability.getModel().getValueAt(row, 1).toString(), formatter);
         String time = tableAvailability.getModel().getValueAt(row, 2).toString();
-        TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
+        TimeOfDay bookingTime = RoomBookingFunctions.returnTimeFromString(time);
         if (RoomBookingFunctions.doesBookingExist(sharedData.getTheBookings(), roomName, bookingDate, bookingTime)) {
             //this shouldn't occur due to the observer design pattern automatically updating the gui
             JOptionPane.showMessageDialog(null, "Booking Not Added! Someone already booked this!");
             return;
         }
         //Add booking
-        OneBooking newBooking = new OneBooking(RoomBookingFunctions.getRoomFromName(sharedData.getTheRooms(), roomName), bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
+        OneBooking newBooking = new OneBooking(roomName, bookerName, bookerEmail, bookerPhone, bookingNotes, bookingDate, bookingTime);
         sharedData.addBooking(newBooking);
         JOptionPane.showMessageDialog(null, "Booking Added!");
         clearTextBoxes();

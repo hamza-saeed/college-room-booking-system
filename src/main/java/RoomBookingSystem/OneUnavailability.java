@@ -13,22 +13,22 @@ import java.time.LocalDate;
  */
 public class OneUnavailability {
     
-    private OneRoom Room;
+    private String RoomName;
     private LocalDate UnavailabilityStart;
     private LocalDate UnavailabilityEnd;
     private String Reason;
     
-    public OneUnavailability(OneRoom room, LocalDate unavailStart, LocalDate unavailEnd, String reason)
+    public OneUnavailability(String roomName, LocalDate unavailStart, LocalDate unavailEnd, String reason)
     {
-        Room = room;
+        RoomName = roomName;
         UnavailabilityStart = unavailStart;
         UnavailabilityEnd = unavailEnd;
         Reason = reason;
     }
     
-    public OneRoom getRoom() 
+    public String getRoomName() 
     {
-        return Room;
+        return RoomName;
     }
     
     public LocalDate returnUnavailStart()

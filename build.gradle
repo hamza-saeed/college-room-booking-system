@@ -11,4 +11,5 @@ repositories {
 
 dependencies {
     testImplementation     'junit:junit:4.13'
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.23.1'
 }
