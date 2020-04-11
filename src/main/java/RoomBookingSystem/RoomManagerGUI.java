@@ -99,6 +99,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jScrollPane4.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(830, 330));
         setSize(new java.awt.Dimension(830, 330));
         getContentPane().setLayout(null);
@@ -458,7 +459,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jTabbedPane1.addTab("Mark Room as Unavailable", jPanel4);
 
         getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(30, 60, 780, 220);
+        jTabbedPane1.setBounds(20, 60, 780, 220);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

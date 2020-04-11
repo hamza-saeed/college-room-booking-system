@@ -57,7 +57,7 @@ public class SharedData extends Observable {
             while (rs.next()) {
                 String roomTypeStr = rs.getString(2);
                 TypeOfRoom roomType = (roomTypeStr.equals("COMPUTER_LAB")) ? TypeOfRoom.COMPUTER_LAB : (roomTypeStr.equals("TUTORIAL_ROOM")) ? TypeOfRoom.TUTORIAL_ROOM : (roomTypeStr.equals("LECTURE_THEATRE")) ? TypeOfRoom.LECTURE_THEATRE : null;
-                OneRoom oneRoom = new OneRoom(rs.getString(1), roomType, rs.getInt(3));
+                OneRoom oneRoom = new OneRoom(rs.getString(1), RoomBookingFunctions.returnRoomTypeFromString(roomTypeStr), rs.getInt(3));
                 listOfRooms.add(oneRoom);
             }
         } catch (Exception e) {
