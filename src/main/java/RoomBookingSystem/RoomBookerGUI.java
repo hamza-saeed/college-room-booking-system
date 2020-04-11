@@ -1,5 +1,6 @@
 package RoomBookingSystem;
 
+import DataStructures.*;
 import java.time.LocalDate;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,6 +12,7 @@ import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Room Booker GUI
  *
  * @author Hamza
  */
@@ -249,9 +251,8 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
             model.addRow(new Object[]{availRoom.getRoom().getRoomName(), textDateFilter, availRoom.getDayTime(), availRoom.getRoom().getSpaces(), availRoom.getRoom().getTypeOfRoom()});
         }
     }
-    
-    private void clearTextBoxes()
-    {
+
+    private void clearTextBoxes() {
         //clear inputs
         txtName.setText("");
         txtEmail.setText("");

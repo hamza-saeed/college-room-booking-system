@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package RoomBookingSystem;
+package DataStructures;
 
 import java.time.LocalDate;
 
 /**
+ * Defines One Booking
  *
  * @author Hamza
  */
-
 public class OneBooking {
-    
+
     private String RoomName;
     private String BookerName;
     private String BookerEmail;
@@ -21,9 +16,8 @@ public class OneBooking {
     private String BookingNotes;
     private LocalDate BookingDate;
     private TimeOfDay BookingTime;
-    
-    public OneBooking(String roomName, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes,LocalDate bookingDate, TimeOfDay bookingTime)
-    {
+
+    public OneBooking(String roomName, String bookerName, String bookerEmail, String bookerPhone, String bookingNotes, LocalDate bookingDate, TimeOfDay bookingTime) {
         RoomName = roomName;
         BookerName = bookerName;
         BookerEmail = bookerEmail;
@@ -32,40 +26,33 @@ public class OneBooking {
         BookingDate = bookingDate;
         BookingTime = bookingTime;
     }
-    
-    public String getRoomName()
-    {
+
+    public String getRoomName() {
         return RoomName;
     }
-    
-    public String getBookerName()
-    {
+
+    public String getBookerName() {
         return BookerName;
     }
-    
-    public String getBookerEmail()
-    {
+
+    public String getBookerEmail() {
         return BookerEmail;
     }
-    
-    public String getBookerPhone()
-    {
+
+    public String getBookerPhone() {
         return BookerPhone;
     }
-    
-    public String getBookingNotes()
-    {
+
+    public String getBookingNotes() {
         return BookingNotes;
     }
-    
-    public LocalDate getBookingDate()
-    {
+
+    public LocalDate getBookingDate() {
         return BookingDate;
     }
-    
-    public TimeOfDay getBookingTime()
-    {
+
+    public TimeOfDay getBookingTime() {
         return BookingTime;
     }
-    
+
 }

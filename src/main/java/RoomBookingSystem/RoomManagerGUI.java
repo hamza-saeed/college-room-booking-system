@@ -1,5 +1,6 @@
 package RoomBookingSystem;
 
+import DataStructures.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,6 +13,7 @@ import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Room Manager GUI
  *
  * @author Hamza
  */
@@ -574,10 +576,9 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private void btnAddUnavailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUnavailabilityActionPerformed
         int row = comboRoom.getSelectedIndex();
         //ensure a room is selected
-        if (row == -1)
-        {
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Unavailability Not Added. Room Must Be Selected!");
-            return;  
+            return;
         }
         //get data from inputs
         String textUnavailStarting = ((JSpinner.DefaultEditor) spinUnavailableFrom.getEditor()).getTextField().getText();
@@ -596,8 +597,6 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         JOptionPane.showMessageDialog(null, "Unavailability Added!");
         txtReason.setText("");
     }//GEN-LAST:event_btnAddUnavailabilityActionPerformed
-
-
 
     @Override
     public void run() {

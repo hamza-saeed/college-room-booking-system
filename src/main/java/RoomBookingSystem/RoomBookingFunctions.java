@@ -1,5 +1,6 @@
 package RoomBookingSystem;
 
+import DataStructures.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -88,9 +89,8 @@ public class RoomBookingFunctions {
         }
         return availableRooms;
     }
-    
-    public static TimeOfDay returnTimeFromString(String time)
-    {
+
+    public static TimeOfDay returnTimeFromString(String time) {
         TimeOfDay bookingTime = (time.equals("MORNING")) ? TimeOfDay.MORNING : (time.equals("AFTERNOON")) ? TimeOfDay.AFTERNOON : (time.equals("EVENING")) ? TimeOfDay.EVENING : null;
         return bookingTime;
     }
