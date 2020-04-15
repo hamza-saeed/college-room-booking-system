@@ -63,9 +63,9 @@ public class RoomBookingFunctions {
     }
 
     //find available bookings on a certain day
-    public static ArrayList<AvailableRoom> getAvailableBookingsOnDay(ArrayList<OneBooking> bookings, ArrayList<OneRoom> rooms, ArrayList<OneTerm> terms, ArrayList<OneUnavailability> unavailabilities, String dateText, String roomType) {
+    public static ArrayList<OneAvailableRoom> getAvailableBookingsOnDay(ArrayList<OneBooking> bookings, ArrayList<OneRoom> rooms, ArrayList<OneTerm> terms, ArrayList<OneUnavailability> unavailabilities, String dateText, String roomType) {
         LocalDate date = LocalDate.parse(dateText, formatter);
-        ArrayList<AvailableRoom> availableRooms = new ArrayList<AvailableRoom>();
+        ArrayList<OneAvailableRoom> availableRooms = new ArrayList<OneAvailableRoom>();
         ArrayList<TimeOfDay> times = new ArrayList<TimeOfDay>();
         boolean dateWithinTerm = RoomBookingFunctions.isDateWithinTerm(terms, date);
         //calculate times available based on days of week and whether the date is within a term
@@ -83,7 +83,7 @@ public class RoomBookingFunctions {
                 //add to list of available rooms if booking on that day/time doesn't already exist
                 if (!RoomBookingFunctions.doesBookingExist(bookings, room.getRoomName(), date, time) && (!RoomBookingFunctions.isRoomUnavailable(unavailabilities, room.getRoomName(), date))) {
                     if ((room.getTypeOfRoom().equals(RoomBookingFunctions.returnRoomTypeFromString(roomType))) || (roomType.equals("Any"))) {
-                        AvailableRoom availRoom = new AvailableRoom(date, time, RoomBookingFunctions.getRoomFromName(rooms, room.getRoomName()));
+                        OneAvailableRoom availRoom = new OneAvailableRoom(date, time, RoomBookingFunctions.getRoomFromName(rooms, room.getRoomName()));
                         availableRooms.add(availRoom);
                     }
                 }
@@ -93,9 +93,9 @@ public class RoomBookingFunctions {
     }
 
     //find available bookings for the next fortnight
-    public static ArrayList<AvailableRoom> getAvailableBookingsWithinAFortnight(ArrayList<OneBooking> bookings, ArrayList<OneRoom> rooms, ArrayList<OneTerm> terms, ArrayList<OneUnavailability> unavailabilities) {
+    public static ArrayList<OneAvailableRoom> getAvailableBookingsWithinAFortnight(ArrayList<OneBooking> bookings, ArrayList<OneRoom> rooms, ArrayList<OneTerm> terms, ArrayList<OneUnavailability> unavailabilities) {
         LocalDate todaysDate = LocalDate.now();
-        ArrayList<AvailableRoom> availableRooms = new ArrayList<AvailableRoom>();
+        ArrayList<OneAvailableRoom> availableRooms = new ArrayList<OneAvailableRoom>();
         //for the next 2 weeks days
         for (int i = 0; i <= 14; i++) {
             ArrayList<TimeOfDay> times = new ArrayList<TimeOfDay>();
@@ -115,7 +115,7 @@ public class RoomBookingFunctions {
                 for (TimeOfDay time : times) {
                     //add to list of available rooms if booking on that day/time doesn't already exist
                     if (!RoomBookingFunctions.doesBookingExist(bookings, room.getRoomName(), date, time) && (!RoomBookingFunctions.isRoomUnavailable(unavailabilities, room.getRoomName(), date))) {
-                        AvailableRoom availRoom = new AvailableRoom(date, time, RoomBookingFunctions.getRoomFromName(rooms, room.getRoomName()));
+                        OneAvailableRoom availRoom = new OneAvailableRoom(date, time, RoomBookingFunctions.getRoomFromName(rooms, room.getRoomName()));
                         availableRooms.add(availRoom);
                     }
                 }
@@ -133,31 +133,4 @@ public class RoomBookingFunctions {
         TypeOfRoom roomType = (type.equals("COMPUTER_LAB")) ? TypeOfRoom.COMPUTER_LAB : (type.equals("TUTORIAL_ROOM")) ? TypeOfRoom.TUTORIAL_ROOM : (type.equals("LECTURE_THEATRE")) ? TypeOfRoom.LECTURE_THEATRE : null;
         return roomType;
     }
-}
-
-//data structure used to return available rooms
-class AvailableRoom {
-
-    private LocalDate Date;
-    private TimeOfDay DayTime;
-    private OneRoom Room;
-
-    public AvailableRoom(LocalDate date, TimeOfDay dayTime, OneRoom room) {
-        Date = date;
-        DayTime = dayTime;
-        Room = room;
-    }
-
-    public LocalDate getDate() {
-        return Date;
-    }
-
-    public TimeOfDay getDayTime() {
-        return DayTime;
-    }
-
-    public OneRoom getRoom() {
-        return Room;
-    }
-
 }

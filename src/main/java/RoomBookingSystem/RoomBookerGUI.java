@@ -331,7 +331,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
         String textDateFilter = ((JSpinner.DefaultEditor) spinDateFilter.getEditor()).getTextField().getText();
         DefaultTableModel model = (DefaultTableModel) tableAvailability.getModel();
         model.setRowCount(0);
-        ArrayList<AvailableRoom> availableRooms = null;
+        ArrayList<OneAvailableRoom> availableRooms = null;
         //get available rooms
         if (updateTableForSpecificDay) {
             availableRooms = RoomBookingFunctions.getAvailableBookingsOnDay(sharedData.getTheBookings(), sharedData.getTheRooms(), sharedData.getTheTerms(), sharedData.getTheUnavailabilities(), textDateFilter, comboRoomType.getSelectedItem().toString());
@@ -339,7 +339,7 @@ public class RoomBookerGUI extends javax.swing.JFrame implements Runnable, Obser
             availableRooms = RoomBookingFunctions.getAvailableBookingsWithinAFortnight(sharedData.getTheBookings(), sharedData.getTheRooms(), sharedData.getTheTerms(), sharedData.getTheUnavailabilities());
         }
         //populate table with available rooms
-        for (AvailableRoom availRoom : availableRooms) {
+        for (OneAvailableRoom availRoom : availableRooms) {
             model.addRow(new Object[]{availRoom.getRoom().getRoomName(), availRoom.getDate().format(formatter), availRoom.getDayTime(), availRoom.getRoom().getSpaces(), availRoom.getRoom().getTypeOfRoom()});
         }
     }
