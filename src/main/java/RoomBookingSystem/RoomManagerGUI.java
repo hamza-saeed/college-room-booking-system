@@ -1,6 +1,7 @@
 package RoomBookingSystem;
 
 import DataStructures.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +30,10 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         sharedData = initialBookings;
         sharedData.addObserver(this);
         initComponents();
+        paneBookings.setVisible(false);
+        paneTerms.setVisible(false);
+        paneUnavailabilities.setVisible(false);
+        paneViewAvailability.setVisible(false);
         updateSharedData();
     }
 
@@ -42,9 +48,21 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
 
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        back = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        expanderRooms = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        expanderUnavailabilities = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        expanderBookings = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        expanderViewAvailability = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        expanderTerms = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        paneRooms = new javax.swing.JPanel();
         btnAddRoom = new javax.swing.JButton();
         spinRoomSpaces = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
@@ -55,11 +73,11 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jScrollPane2 = new javax.swing.JScrollPane();
         tableRooms = new javax.swing.JTable();
         btnDeleteRoom = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        paneBookings = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBookings = new javax.swing.JTable();
         btnDeleteBooking = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        paneTerms = new javax.swing.JPanel();
         btnAddTermDate = new javax.swing.JButton();
         SimpleDateFormat spinTermEndingModel = new SimpleDateFormat("dd/MM/yyyy");
         spinTermEnding = new javax.swing.JSpinner();
@@ -70,7 +88,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jScrollPane3 = new javax.swing.JScrollPane();
         tableTerms = new javax.swing.JTable();
         btnRemoveTerm = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        paneUnavailabilities = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         SimpleDateFormat spinDateModel = new SimpleDateFormat("dd/MM/yyyy");
         spinUnavailableFrom = new javax.swing.JSpinner();
@@ -85,7 +103,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         jLabel3 = new javax.swing.JLabel();
         comboRoom = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        paneViewAvailability = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableAvailability = new javax.swing.JTable();
         btnAllAvailabilitiesTwoWeeks = new javax.swing.JButton();
@@ -113,14 +131,209 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(830, 330));
-        setSize(new java.awt.Dimension(830, 330));
-        getContentPane().setLayout(null);
+        setResizable(false);
+        setSize(new java.awt.Dimension(990, 360));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setLayout(null);
+
+        jPanel7.setBackground(new java.awt.Color(22, 33, 53));
+        jPanel7.setLayout(null);
+
+        expanderRooms.setBackground(new java.awt.Color(37, 49, 71));
+        expanderRooms.setForeground(new java.awt.Color(255, 255, 255));
+        expanderRooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expanderRoomsMousePressed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Rooms");
+
+        javax.swing.GroupLayout expanderRoomsLayout = new javax.swing.GroupLayout(expanderRooms);
+        expanderRooms.setLayout(expanderRoomsLayout);
+        expanderRoomsLayout.setHorizontalGroup(
+            expanderRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expanderRoomsLayout.createSequentialGroup()
+                .addContainerGap(77, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(70, 70, 70))
+        );
+        expanderRoomsLayout.setVerticalGroup(
+            expanderRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expanderRoomsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel7.add(expanderRooms);
+        expanderRooms.setBounds(0, 102, 190, 52);
+
+        expanderUnavailabilities.setBackground(new java.awt.Color(28, 36, 53));
+        expanderUnavailabilities.setForeground(new java.awt.Color(255, 255, 255));
+        expanderUnavailabilities.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expanderUnavailabilitiesMousePressed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Mark Room As Unavailable");
+
+        javax.swing.GroupLayout expanderUnavailabilitiesLayout = new javax.swing.GroupLayout(expanderUnavailabilities);
+        expanderUnavailabilities.setLayout(expanderUnavailabilitiesLayout);
+        expanderUnavailabilitiesLayout.setHorizontalGroup(
+            expanderUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expanderUnavailabilitiesLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addContainerGap())
+        );
+        expanderUnavailabilitiesLayout.setVerticalGroup(
+            expanderUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expanderUnavailabilitiesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel7.add(expanderUnavailabilities);
+        expanderUnavailabilities.setBounds(0, 250, 190, 52);
+
+        expanderBookings.setBackground(new java.awt.Color(28, 36, 53));
+        expanderBookings.setForeground(new java.awt.Color(255, 255, 255));
+        expanderBookings.setToolTipText("");
+        expanderBookings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expanderBookingsMousePressed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Bookings");
+
+        javax.swing.GroupLayout expanderBookingsLayout = new javax.swing.GroupLayout(expanderBookings);
+        expanderBookings.setLayout(expanderBookingsLayout);
+        expanderBookingsLayout.setHorizontalGroup(
+            expanderBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expanderBookingsLayout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(65, 65, 65))
+        );
+        expanderBookingsLayout.setVerticalGroup(
+            expanderBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expanderBookingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel7.add(expanderBookings);
+        expanderBookings.setBounds(0, 150, 190, 52);
+
+        expanderViewAvailability.setBackground(new java.awt.Color(28, 36, 53));
+        expanderViewAvailability.setForeground(new java.awt.Color(255, 255, 255));
+        expanderViewAvailability.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expanderViewAvailabilityMousePressed(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("View Availability");
+
+        javax.swing.GroupLayout expanderViewAvailabilityLayout = new javax.swing.GroupLayout(expanderViewAvailability);
+        expanderViewAvailability.setLayout(expanderViewAvailabilityLayout);
+        expanderViewAvailabilityLayout.setHorizontalGroup(
+            expanderViewAvailabilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expanderViewAvailabilityLayout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+        expanderViewAvailabilityLayout.setVerticalGroup(
+            expanderViewAvailabilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expanderViewAvailabilityLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel7.add(expanderViewAvailability);
+        expanderViewAvailability.setBounds(0, 300, 190, 50);
+
+        expanderTerms.setBackground(new java.awt.Color(28, 36, 53));
+        expanderTerms.setForeground(new java.awt.Color(255, 255, 255));
+        expanderTerms.setToolTipText("");
+        expanderTerms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expanderTermsMousePressed(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Terms");
+
+        javax.swing.GroupLayout expanderTermsLayout = new javax.swing.GroupLayout(expanderTerms);
+        expanderTerms.setLayout(expanderTermsLayout);
+        expanderTermsLayout.setHorizontalGroup(
+            expanderTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expanderTermsLayout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
+                .addComponent(jLabel19)
+                .addGap(74, 74, 74))
+        );
+        expanderTermsLayout.setVerticalGroup(
+            expanderTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(expanderTermsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel7.add(expanderTerms);
+        expanderTerms.setBounds(0, 200, 190, 52);
+
+        back.add(jPanel7);
+        jPanel7.setBounds(-10, 0, 190, 360);
+
+        jPanel8.setBackground(new java.awt.Color(40, 79, 143));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Room Manager");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(280, 10, 274, 44);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(258, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        back.add(jPanel8);
+        jPanel8.setBounds(130, 0, 860, 100);
+
+        paneRooms.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAddRoom.setText("Add Room");
         btnAddRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -164,64 +377,67 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout paneRoomsLayout = new javax.swing.GroupLayout(paneRooms);
+        paneRooms.setLayout(paneRoomsLayout);
+        paneRoomsLayout.setHorizontalGroup(
+            paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneRoomsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(paneRoomsLayout.createSequentialGroup()
+                        .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(paneRoomsLayout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spinRoomSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnAddRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneRoomsLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneRoomsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(184, 184, 184))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        paneRoomsLayout.setVerticalGroup(
+            paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneRoomsLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(paneRoomsLayout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(66, 66, 66)
                             .addComponent(jLabel4))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(paneRoomsLayout.createSequentialGroup()
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(30, 30, 30)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(comboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5))
                             .addGap(13, 13, 13)
                             .addComponent(spinRoomSpaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(paneRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddRoom)
                     .addComponent(btnDeleteRoom))
                 .addGap(26, 26, 26))
         );
 
-        jTabbedPane1.addTab("Rooms", jPanel2);
+        back.add(paneRooms);
+        paneRooms.setBounds(190, 130, 775, 192);
+
+        paneBookings.setBackground(new java.awt.Color(255, 255, 255));
 
         tableBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,22 +456,22 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout paneBookingsLayout = new javax.swing.GroupLayout(paneBookings);
+        paneBookings.setLayout(paneBookingsLayout);
+        paneBookingsLayout.setHorizontalGroup(
+            paneBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneBookingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneBookingsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeleteBooking)
                 .addGap(309, 309, 309))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        paneBookingsLayout.setVerticalGroup(
+            paneBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneBookingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,7 +479,10 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                 .addGap(13, 13, 13))
         );
 
-        jTabbedPane1.addTab("Bookings", jPanel1);
+        back.add(paneBookings);
+        paneBookings.setBounds(190, 130, 775, 195);
+
+        paneTerms.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAddTermDate.setText("Add Term Dates");
         btnAddTermDate.addActionListener(new java.awt.event.ActionListener() {
@@ -307,55 +526,58 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout paneTermsLayout = new javax.swing.GroupLayout(paneTerms);
+        paneTerms.setLayout(paneTermsLayout);
+        paneTermsLayout.setHorizontalGroup(
+            paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneTermsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(paneTermsLayout.createSequentialGroup()
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(spinTermBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(spinTermEnding)))
                     .addComponent(btnAddTermDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneTermsLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(paneTermsLayout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(btnRemoveTerm, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        paneTermsLayout.setVerticalGroup(
+            paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneTermsLayout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(paneTermsLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRemoveTerm)
                             .addComponent(btnAddTermDate)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(paneTermsLayout.createSequentialGroup()
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spinTermBeginning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(34, 34, 34)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spinTermEnding, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(50, 50, 50)))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Terms", jPanel3);
+        back.add(paneTerms);
+        paneTerms.setBounds(190, 130, 775, 192);
+
+        paneUnavailabilities.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setText("From:");
 
@@ -404,72 +626,76 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
 
         jLabel10.setText("Room:");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout paneUnavailabilitiesLayout = new javax.swing.GroupLayout(paneUnavailabilities);
+        paneUnavailabilities.setLayout(paneUnavailabilitiesLayout);
+        paneUnavailabilitiesLayout.setHorizontalGroup(
+            paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(btnDeleteUnavailability))
+                .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboRoom, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtReason, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
+                                .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel10))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(40, 40, 40)
-                        .addComponent(btnAddUnavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)))
+                                .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboRoom, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtReason, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUnavailabilitiesLayout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnDeleteUnavailability))
+                        .addGap(48, 48, 48)
+                        .addComponent(btnAddUnavailability, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        paneUnavailabilitiesLayout.setVerticalGroup(
+            paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnDeleteUnavailability)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneUnavailabilitiesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(comboRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel10))
                             .addComponent(spinUnavailableFrom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(paneUnavailabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(spinUnavailableUntil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUnavailabilitiesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddUnavailability)
-                        .addGap(17, 17, 17)))
-                .addGap(19, 19, 19))
+                        .addGap(34, 34, 34))))
         );
 
-        jTabbedPane1.addTab("Mark Room as Unavailable", jPanel4);
+        back.add(paneUnavailabilities);
+        paneUnavailabilities.setBounds(190, 130, 775, 221);
+
+        paneViewAvailability.setBackground(new java.awt.Color(255, 255, 255));
 
         tableAvailability.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -496,9 +722,9 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(229, 229, 229));
+        jPanel6.setBackground(new java.awt.Color(250, 249, 249));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Filter");
 
         jLabel12.setText("Room Booking Date:");
@@ -526,17 +752,17 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spinDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(comboRoomType1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnFindRooms)
-                .addGap(23, 23, 23))
+                .addGap(53, 53, 53))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,38 +778,50 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout paneViewAvailabilityLayout = new javax.swing.GroupLayout(paneViewAvailability);
+        paneViewAvailability.setLayout(paneViewAvailabilityLayout);
+        paneViewAvailabilityLayout.setHorizontalGroup(
+            paneViewAvailabilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneViewAvailabilityLayout.createSequentialGroup()
+                .addGroup(paneViewAvailabilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneViewAvailabilityLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneViewAvailabilityLayout.createSequentialGroup()
                         .addGap(255, 255, 255)
-                        .addComponent(btnAllAvailabilitiesTwoWeeks)))
+                        .addComponent(btnAllAvailabilitiesTwoWeeks))
+                    .addGroup(paneViewAvailabilityLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        paneViewAvailabilityLayout.setVerticalGroup(
+            paneViewAvailabilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneViewAvailabilityLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAllAvailabilitiesTwoWeeks)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("View Availability", jPanel5);
+        back.add(paneViewAvailability);
+        paneViewAvailability.setBounds(190, 130, 775, 214);
 
-        getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(20, 60, 780, 220);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 990, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -750,6 +988,72 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         }
     }//GEN-LAST:event_btnFindRoomsActionPerformed
 
+    private void expanderRoomsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expanderRoomsMousePressed
+        setColour(expanderRooms);
+        resetColour(expanderBookings);
+        resetColour(expanderTerms);
+        resetColour(expanderUnavailabilities);
+        resetColour(expanderViewAvailability);
+        paneRooms.setVisible(true);
+        paneBookings.setVisible(false);
+        paneTerms.setVisible(false);
+        paneUnavailabilities.setVisible(false);
+        paneViewAvailability.setVisible(false);
+
+    }//GEN-LAST:event_expanderRoomsMousePressed
+
+    private void expanderBookingsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expanderBookingsMousePressed
+        setColour(expanderBookings);
+        resetColour(expanderRooms);
+        resetColour(expanderTerms);
+        resetColour(expanderUnavailabilities);
+        resetColour(expanderViewAvailability);
+        paneRooms.setVisible(false);
+        paneBookings.setVisible(true);
+        paneTerms.setVisible(false);
+        paneUnavailabilities.setVisible(false);
+        paneViewAvailability.setVisible(false);
+    }//GEN-LAST:event_expanderBookingsMousePressed
+
+    private void expanderTermsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expanderTermsMousePressed
+        setColour(expanderTerms);
+        resetColour(expanderRooms);
+        resetColour(expanderBookings);
+        resetColour(expanderUnavailabilities);
+        resetColour(expanderViewAvailability);
+        paneRooms.setVisible(false);
+        paneBookings.setVisible(false);
+        paneTerms.setVisible(true);
+        paneUnavailabilities.setVisible(false);
+        paneViewAvailability.setVisible(false);
+    }//GEN-LAST:event_expanderTermsMousePressed
+
+    private void expanderUnavailabilitiesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expanderUnavailabilitiesMousePressed
+        setColour(expanderUnavailabilities);
+        resetColour(expanderRooms);
+        resetColour(expanderBookings);
+        resetColour(expanderTerms);
+        resetColour(expanderViewAvailability);
+        paneRooms.setVisible(false);
+        paneBookings.setVisible(false);
+        paneTerms.setVisible(false);
+        paneUnavailabilities.setVisible(true);
+        paneViewAvailability.setVisible(false);
+    }//GEN-LAST:event_expanderUnavailabilitiesMousePressed
+
+    private void expanderViewAvailabilityMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expanderViewAvailabilityMousePressed
+        setColour(expanderViewAvailability);
+        resetColour(expanderRooms);
+        resetColour(expanderBookings);
+        resetColour(expanderTerms);
+        resetColour(expanderUnavailabilities);
+        paneRooms.setVisible(false);
+        paneBookings.setVisible(false);
+        paneTerms.setVisible(false);
+        paneUnavailabilities.setVisible(false);
+        paneViewAvailability.setVisible(true);
+    }//GEN-LAST:event_expanderViewAvailabilityMousePressed
+
     @Override
     public void run() {
         this.setVisible(true);
@@ -824,8 +1128,17 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         }
     }
 
+    private void setColour(JPanel panel) {
+        panel.setBackground(new Color(37, 49, 71));
+    }
+
+    private void resetColour(JPanel panel) {
+        panel.setBackground(new Color(28, 36, 53));
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel back;
     private javax.swing.JButton btnAddRoom;
     private javax.swing.JButton btnAddTermDate;
     private javax.swing.JButton btnAddUnavailability;
@@ -838,11 +1151,21 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private javax.swing.JComboBox<String> comboRoom;
     private javax.swing.JComboBox<String> comboRoomType;
     private javax.swing.JComboBox<String> comboRoomType1;
+    private javax.swing.JPanel expanderBookings;
+    private javax.swing.JPanel expanderRooms;
+    private javax.swing.JPanel expanderTerms;
+    private javax.swing.JPanel expanderUnavailabilities;
+    private javax.swing.JPanel expanderViewAvailability;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -851,20 +1174,21 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPanel paneBookings;
+    private javax.swing.JPanel paneRooms;
+    private javax.swing.JPanel paneTerms;
+    private javax.swing.JPanel paneUnavailabilities;
+    private javax.swing.JPanel paneViewAvailability;
     private javax.swing.JSpinner spinDateFilter;
     private javax.swing.JSpinner spinRoomSpaces;
     private javax.swing.JSpinner spinTermBeginning;
