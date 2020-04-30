@@ -534,10 +534,10 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
                 .addContainerGap()
                 .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(paneTermsLayout.createSequentialGroup()
-                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneTermsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(spinTermBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(spinTermEnding)))
@@ -861,7 +861,7 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         LocalDate termBeginningDate = LocalDate.parse(textTermBeginning, formatter);
         LocalDate termEndingDate = LocalDate.parse(textTermEnding, formatter);
         //ensure ending date is after start date
-        if (termBeginningDate.isAfter(termEndingDate)) {
+        if (termBeginningDate.isAfter(termEndingDate) || (termBeginningDate.isEqual(termEndingDate))) {
             JOptionPane.showMessageDialog(null, "Term Not Added. Ending Date Must Be After Beginning!");
             return;
         }
@@ -943,6 +943,13 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
             JOptionPane.showMessageDialog(null, "Unavailability Not Added. Room Must Be Selected!");
             return;
         }
+        String reason = txtReason.getText();
+        //ensure reason is entered
+        if (reason.trim().isEmpty()) 
+        {
+            JOptionPane.showMessageDialog(null, "Unavailability Not Added. Reason must be entered!");
+            return;
+        }
         //get data from inputs
         String textUnavailStarting = ((JSpinner.DefaultEditor) spinUnavailableFrom.getEditor()).getTextField().getText();
         String textUnavailEnding = ((JSpinner.DefaultEditor) spinUnavailableUntil.getEditor()).getTextField().getText();
@@ -951,11 +958,11 @@ public class RoomManagerGUI extends javax.swing.JFrame implements Runnable, Obse
         LocalDate unavailEndingDate = LocalDate.parse(textUnavailEnding, formatter);
         //ensure ending date is after starting date
         if (unavailStartingDate.isAfter(unavailEndingDate)) {
-            JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be After Beginning!");
+            JOptionPane.showMessageDialog(null, "Unavailability Not Added. Ending Date Must Be On or After Beginning!");
             return;
         }
         //add new unavailabilityRoomManagerFunctions.getRoomFromName(sharedData.getTheRooms(),
-        OneUnavailability newUnavail = new OneUnavailability(roomName, unavailStartingDate, unavailEndingDate, txtReason.getText());
+        OneUnavailability newUnavail = new OneUnavailability(roomName, unavailStartingDate, unavailEndingDate, reason);
         sharedData.addUnavailability(newUnavail);
         JOptionPane.showMessageDialog(null, "Unavailability Added!");
         txtReason.setText("");
